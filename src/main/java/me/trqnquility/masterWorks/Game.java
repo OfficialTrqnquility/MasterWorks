@@ -1,6 +1,6 @@
-package me.alexander.masterWorks;
+package me.trqnquility.masterWorks;
 
-import me.alexander.masterWorks.display.Display;
+import me.trqnquility.masterWorks.display.Display;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;

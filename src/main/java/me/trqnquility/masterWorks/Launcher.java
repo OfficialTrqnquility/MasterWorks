@@ -1,4 +1,4 @@
-package me.alexander.masterWorks;
+package me.trqnquility.masterWorks;
 
 public class Launcher {
 

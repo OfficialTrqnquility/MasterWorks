@@ -1,4 +1,4 @@
-package me.alexander.masterWorks.display;
+package me.trqnquility.masterWorks.display;
 
 import javax.swing.*;
 import java.awt.*;
