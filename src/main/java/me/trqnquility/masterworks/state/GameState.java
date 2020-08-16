@@ -6,12 +6,12 @@ public class GameState extends State{
 
 
     @Override
-    void tick() {
+    public void tick() {
 
     }
 
     @Override
-    void render(Graphics g) {
+    public void render(Graphics g) {
 
     }
 }
