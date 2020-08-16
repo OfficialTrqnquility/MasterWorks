@@ -1,10 +1,13 @@
 package me.trqnquility.masterworks.worlds;
 
+import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class WorldLoader {
 
     private final String worldFile;
+
+    private String loadedFile[];
 
     public WorldLoader(String worldFile) {
         this.worldFile = worldFile;
