@@ -1,7 +1,7 @@
-package me.trqnquility.masterWorks;
+package me.trqnquility.masterworks;
 
-import me.trqnquility.masterWorks.display.Display;
-import me.trqnquility.masterWorks.state.State;
+import me.trqnquility.masterworks.display.Display;
+import me.trqnquility.masterworks.state.State;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;

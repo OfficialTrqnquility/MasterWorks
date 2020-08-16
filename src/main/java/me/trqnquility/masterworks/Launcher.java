@@ -1,4 +1,4 @@
-package me.trqnquility.masterWorks;
+package me.trqnquility.masterworks;
 
 public class Launcher {
 

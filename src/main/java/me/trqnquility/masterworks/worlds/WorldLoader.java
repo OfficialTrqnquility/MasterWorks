@@ -1,4 +1,4 @@
-package me.trqnquility.masterWorks.worlds;
+package me.trqnquility.masterworks.worlds;
 
 import java.util.concurrent.ConcurrentHashMap;
 

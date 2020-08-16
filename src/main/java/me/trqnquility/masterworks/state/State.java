@@ -1,4 +1,4 @@
-package me.trqnquility.masterWorks.state;
+package me.trqnquility.masterworks.state;
 
 import java.awt.*;
 

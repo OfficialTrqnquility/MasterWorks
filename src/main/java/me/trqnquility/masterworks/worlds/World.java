@@ -1,4 +1,4 @@
-package me.trqnquility.masterWorks.worlds;
+package me.trqnquility.masterworks.worlds;
 
 
 public class World {
