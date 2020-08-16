@@ -1,6 +1,7 @@
 package me.trqnquility.masterWorks;
 
 import me.trqnquility.masterWorks.display.Display;
+import me.trqnquility.masterWorks.state.State;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -41,7 +42,7 @@ public class Game implements Runnable{
         //Clear Screen
         graphics.clearRect(0, 0, width, height); // Resets the screen
         //Draw Here!
-
+        State.getState().render(graphics);
         //End Drawing!
         bufferStrategy.show();
         graphics.dispose();
