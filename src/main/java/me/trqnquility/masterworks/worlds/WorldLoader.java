@@ -1,36 +1,51 @@
 package me.trqnquility.masterworks.worlds;
 
-import java.util.HashMap;
-import java.util.concurrent.ConcurrentHashMap;
+import me.trqnquility.masterworks.utils.Utils;
 
 public class WorldLoader {
 
     private final String worldFile;
 
-    private String loadedFile[];
+    private String tokens[];
+    private int width, height, playerSpawnx, playerSpawnY;
+    private int[][] tiles;
 
     public WorldLoader(String worldFile) {
         this.worldFile = worldFile;
+
+        tokens = Utils.loadFileAsString(worldFile).split("\\s+");
+        width = Utils.parseInt(tokens[1]);
+        height = Utils.parseInt(tokens[2]);
+        playerSpawnx = Utils.parseInt(tokens[3]);
+        playerSpawnY = Utils.parseInt(tokens[4]);
+
+        tiles = new int[width][height];
+        for(int y = 0;y < height;y++){
+            for(int x = 0;x < width;x++){
+                tiles[x][y] = Utils.parseInt(tokens[(x + y * width + 4)]);
+            }
+        }
+
     }
 
 
-    public ConcurrentHashMap getTiles() {
-        return null;
+    public int[][] getTiles() {
+        return tiles;
     }
 
     public int getWidth() {
-        return 1;
+        return width;
     }
 
     public int getHeight() {
-        return 1;
+        return height;
     }
 
     public int getPlayerSpawnX() {
-        return 1;
+        return playerSpawnx;
     }
 
     public int getPlayerSpawnY() {
-        return 1;
+        return playerSpawnY;
     }
 }

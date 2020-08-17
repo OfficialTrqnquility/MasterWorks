@@ -22,4 +22,14 @@ public class Utils {
         }
         return content;
     }
+
+
+    public static int parseInt(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }
