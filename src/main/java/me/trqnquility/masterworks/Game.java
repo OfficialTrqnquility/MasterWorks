@@ -1,6 +1,7 @@
 package me.trqnquility.masterworks;
 
 import me.trqnquility.masterworks.display.Display;
+import me.trqnquility.masterworks.keymanager.KeyManager;
 import me.trqnquility.masterworks.state.State;
 
 import java.awt.*;
@@ -18,10 +19,13 @@ public class Game implements Runnable{
     private BufferStrategy bufferStrategy;
     private Graphics graphics;
 
+    private KeyManager keyManager;
+
     public Game(String title, int width, int height) {
         this.width = width;
         this.height = height;
         this.title = title;
+        keyManager = new KeyManager();
     }
 
     private void init(){
@@ -101,5 +105,10 @@ public class Game implements Runnable{
             e.printStackTrace();
         }
     }
+
+    public KeyManager getKeyManager(){
+        return keyManager;
+    }
+
 
 }
