@@ -6,6 +6,7 @@ import me.trqnquility.masterworks.exceptions.NoTileException;
 @Getter
 public class TileManager {
 
+    @Getter
     private static final TileManager instance = new TileManager();
 
     private final Tile[] tiles;

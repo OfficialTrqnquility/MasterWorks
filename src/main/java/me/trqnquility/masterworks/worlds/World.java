@@ -1,7 +1,9 @@
 package me.trqnquility.masterworks.worlds;
 
 
+import me.trqnquility.masterworks.exceptions.NoTileException;
 import me.trqnquility.masterworks.tiles.Tile;
+import me.trqnquility.masterworks.tiles.TileManager;
 
 import java.awt.*;
 
@@ -22,13 +24,17 @@ public class World {
 
     }
 
-    public Tile getTile(int x, int y) {
-        return null;
+    public Tile getTile(int x, int y) throws NoTileException {
+
+        Tile tile = TileManager.getInstance().getTile(tiles[x][y]);
+
+        return tile == null ? null : tile;
     }
 
     public void render(Graphics g) {
 
     }
+
     public void tick() {
 
     }

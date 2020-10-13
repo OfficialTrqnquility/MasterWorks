@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 @Getter
-public class Tile implements Tickable {
+public abstract class Tile {
 
     public static final int TILEWIDTH = 32, TILEHEIGHT = 32;
 
@@ -21,10 +21,7 @@ public class Tile implements Tickable {
 
     }
 
-    @Override
-    public void tick() {
-
-    }
+    public abstract void tick(int x, int y);
 
     public void render(Graphics g, int x, int y) {
         g.drawImage(image, x, y, TILEWIDTH, TILEHEIGHT, null);
