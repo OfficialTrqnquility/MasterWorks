@@ -1,13 +1,16 @@
 package me.trqnquility.masterworks;
 
 import me.trqnquility.masterworks.display.Display;
+import me.trqnquility.masterworks.exceptions.NoStateException;
 import me.trqnquility.masterworks.keymanager.KeyManager;
+import me.trqnquility.masterworks.state.GameState;
 import me.trqnquility.masterworks.state.State;
+import me.trqnquility.masterworks.worlds.World;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
-public class Game implements Runnable{
+public class Game implements Runnable {
 
     private Display display;
     public final int width, height;
@@ -30,18 +33,31 @@ public class Game implements Runnable{
 
     private void init(){
         display = new Display(title, width, height);
+        State.setState(new GameState(new World("/assets/worlds/overworld.txt")));
+    }
+
+    private void tick() throws NoStateException{
+
+        State state = State.getState();
+
+        if (state == null) throw new NoStateException("State is null");
+
+        state.tick();
 
     }
 
-    private void tick(){
-    }
-
-    private void render(){
+    private void render() throws NoStateException {
         bufferStrategy = display.getCanvas().getBufferStrategy();
+
+        State state = State.getState();
+
         if(bufferStrategy == null){
             display.getCanvas().createBufferStrategy(3);
             return;
         }
+
+        if (state == null) throw new NoStateException("State is null");
+
         graphics = bufferStrategy.getDrawGraphics();
         //Clear Screen
         graphics.clearRect(0, 0, width, height); // Resets the screen
@@ -71,8 +87,12 @@ public class Game implements Runnable{
             lastTime = now;
 
             if(delta >= 1){
-                tick(); // Updates everything
-                render(); // Renders everything
+                try {
+                    tick(); // Updates everything
+                    render(); // Renders everything
+                } catch (NoStateException e) {
+                    e.printStackTrace();
+                }
                 ticks++;
                 delta--;
             }
