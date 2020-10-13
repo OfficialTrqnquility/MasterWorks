@@ -20,8 +20,6 @@ public class KeyManager implements KeyListener {
 
     }
 
-
-
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -29,11 +27,11 @@ public class KeyManager implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        keys[e.getKeyCode()] = true;
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        keys[e.getKeyCode()] = false;
     }
 }
