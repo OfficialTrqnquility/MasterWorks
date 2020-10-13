@@ -1,26 +1,52 @@
 package me.trqnquility.masterworks.utils;
 
-import java.io.*;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Utils {
 
     public static String loadFileAsString(String path) {
-        String content = "";
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(path));
-            StringBuilder stringBuilder = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line + "\n");
-            }
-// delete the last new line separator
-            reader.close();
+        StringBuilder builder = new StringBuilder();
 
-             content = stringBuilder.toString();
+        try {
+
+            BufferedReader br = new BufferedReader(new FileReader(path));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+
+                builder.append(line + "\n");
+            }
+
+            br.close();
+
         } catch (IOException e) {
+
             e.printStackTrace();
+
         }
-        return content;
+
+        return builder.toString();
+    }
+
+
+    public static BufferedImage loadImage(String path) {
+
+        try {
+
+            return ImageIO.read(Utils.class.getResource(path));
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+            System.exit(1);
+
+        }
+
+        return null;
     }
 
 
