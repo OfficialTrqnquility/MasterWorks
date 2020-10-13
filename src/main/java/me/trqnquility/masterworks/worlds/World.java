@@ -1,16 +1,18 @@
 package me.trqnquility.masterworks.worlds;
 
 
+import me.trqnquility.masterworks.tiles.Tile;
+
 import java.awt.*;
 
 public class World {
 
-    private final int width, height, playerSpawnX, playerSpawnY;
+    private int width, height, playerSpawnX, playerSpawnY;
 
-    private final int[][] tiles;
+    private int[][] tiles;
 
     public World(String path) {
-        WorldLoader worldLoader= new WorldLoader(path);
+        WorldLoader worldLoader = new WorldLoader(path);
 
         width = worldLoader.getWidth();
         height = worldLoader.getHeight();
@@ -20,7 +22,9 @@ public class World {
 
     }
 
-
+    public Tile getTile(int x, int y) {
+        return null;
+    }
 
     public void render(Graphics g) {
 
@@ -28,4 +32,6 @@ public class World {
     public void tick() {
 
     }
+
+
 }

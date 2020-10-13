@@ -4,14 +4,11 @@ import me.trqnquility.masterworks.utils.Utils;
 
 public class WorldLoader {
 
-    private final String worldFile;
-
     private String tokens[];
     private int width, height, playerSpawnx, playerSpawnY;
     private int[][] tiles;
 
     public WorldLoader(String worldFile) {
-        this.worldFile = worldFile;
 
         tokens = Utils.loadFileAsString(worldFile).split("\\s+");
         width = Utils.parseInt(tokens[1]);
