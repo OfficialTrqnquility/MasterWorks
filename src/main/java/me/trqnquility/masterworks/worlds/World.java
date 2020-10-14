@@ -3,7 +3,6 @@ package me.trqnquility.masterworks.worlds;
 
 import me.trqnquility.masterworks.Game;
 import me.trqnquility.masterworks.exceptions.NoTileException;
-import me.trqnquility.masterworks.gfx.Assets;
 import me.trqnquility.masterworks.tiles.Tile;
 import me.trqnquility.masterworks.tiles.TileManager;
 
@@ -39,7 +38,7 @@ public class World {
 
             for (int col = 0; col < tiles[row].length; col++) {
 
-                getTile(row, col).render(g, row * Game.getInstance().height / tiles.length, col * 32);
+                getTile(row, col).render(g, row * Game.getInstance().height / height, col * Game.getInstance().width / width);
             }
 
         }
