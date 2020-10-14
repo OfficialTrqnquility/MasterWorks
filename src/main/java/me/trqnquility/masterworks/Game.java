@@ -1,5 +1,6 @@
 package me.trqnquility.masterworks;
 
+import lombok.Getter;
 import me.trqnquility.masterworks.display.Display;
 import me.trqnquility.masterworks.exceptions.NoStateException;
 import me.trqnquility.masterworks.keymanager.KeyManager;
@@ -11,6 +12,9 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 
 public class Game implements Runnable {
+
+    @Getter
+    private Game instance;
 
     private Display display;
     public final int width, height;
@@ -33,7 +37,7 @@ public class Game implements Runnable {
 
     private void init(){
         display = new Display(title, width, height);
-        State.setState(new GameState(new World("/assets/worlds/overworld.txt")));
+        State.setState(new GameState(new World("worlds/overworld.txt")));
     }
 
     private void tick() throws NoStateException{
@@ -109,6 +113,9 @@ public class Game implements Runnable {
 
 
     public synchronized void start(){
+
+        instance = this;
+
         if(running)
             return;
         running = true;

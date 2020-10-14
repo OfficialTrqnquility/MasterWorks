@@ -13,7 +13,7 @@ public class Utils {
 
         try {
 
-            BufferedReader br = new BufferedReader(new FileReader(path));
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/" + path));
             String line;
 
             while ((line = br.readLine()) != null) {
@@ -37,7 +37,7 @@ public class Utils {
 
         try {
 
-            return ImageIO.read(Utils.class.getResource(path));
+            return ImageIO.read(Utils.class.getResource("src/main/resources/" + path));
 
         } catch (IOException e) {
 

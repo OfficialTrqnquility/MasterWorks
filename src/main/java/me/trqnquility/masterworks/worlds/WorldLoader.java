@@ -2,6 +2,8 @@ package me.trqnquility.masterworks.worlds;
 
 import me.trqnquility.masterworks.utils.Utils;
 
+import java.util.Arrays;
+
 public class WorldLoader {
 
     private String tokens[];
@@ -11,10 +13,10 @@ public class WorldLoader {
     public WorldLoader(String worldFile) {
 
         tokens = Utils.loadFileAsString(worldFile).split("\\s+");
-        width = Utils.parseInt(tokens[1]);
-        height = Utils.parseInt(tokens[2]);
-        playerSpawnx = Utils.parseInt(tokens[3]);
-        playerSpawnY = Utils.parseInt(tokens[4]);
+        width = Utils.parseInt(tokens[0]);
+        height = Utils.parseInt(tokens[1]);
+        playerSpawnx = Utils.parseInt(tokens[2]);
+        playerSpawnY = Utils.parseInt(tokens[3]);
 
         tiles = new int[width][height];
         for(int y = 0;y < height;y++){
