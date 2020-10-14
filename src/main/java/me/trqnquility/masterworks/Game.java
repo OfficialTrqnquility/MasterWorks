@@ -1,8 +1,11 @@
 package me.trqnquility.masterworks;
 
 import lombok.Getter;
+import lombok.SneakyThrows;
 import me.trqnquility.masterworks.display.Display;
 import me.trqnquility.masterworks.exceptions.NoStateException;
+import me.trqnquility.masterworks.exceptions.NoTileException;
+import me.trqnquility.masterworks.gfx.Assets;
 import me.trqnquility.masterworks.keymanager.KeyManager;
 import me.trqnquility.masterworks.state.GameState;
 import me.trqnquility.masterworks.state.State;
@@ -14,7 +17,7 @@ import java.awt.image.BufferStrategy;
 public class Game implements Runnable {
 
     @Getter
-    private Game instance;
+    private static Game instance;
 
     private Display display;
     public final int width, height;
@@ -35,12 +38,17 @@ public class Game implements Runnable {
         keyManager = new KeyManager();
     }
 
-    private void init(){
+    private void init() {
+
+        Assets.init();
+
         display = new Display(title, width, height);
+
         State.setState(new GameState(new World("worlds/overworld.txt")));
+
     }
 
-    private void tick() throws NoStateException{
+    private void tick() throws NoStateException {
 
         State state = State.getState();
 
@@ -50,12 +58,13 @@ public class Game implements Runnable {
 
     }
 
-    private void render() throws NoStateException {
+    @SneakyThrows
+    private void render() throws NoStateException, NoTileException {
         bufferStrategy = display.getCanvas().getBufferStrategy();
 
         State state = State.getState();
 
-        if(bufferStrategy == null){
+        if (bufferStrategy == null) {
             display.getCanvas().createBufferStrategy(3);
             return;
         }
@@ -84,24 +93,24 @@ public class Game implements Runnable {
         long timer = 0;
         int ticks = 0;
 
-        while(running){
+        while (running) {
             now = System.nanoTime();
             delta += (now - lastTime) / timePerTick;
             timer += now - lastTime;
             lastTime = now;
 
-            if(delta >= 1){
+            if (delta >= 1) {
                 try {
                     tick(); // Updates everything
                     render(); // Renders everything
-                } catch (NoStateException e) {
+                } catch (NoStateException | NoTileException e) {
                     e.printStackTrace();
                 }
                 ticks++;
                 delta--;
             }
 
-            if(timer >= 1000000000){
+            if (timer >= 1000000000) {
                 System.out.println("Ticks and Frames: " + ticks);
                 ticks = 0;
                 timer = 0;
@@ -112,19 +121,19 @@ public class Game implements Runnable {
     }
 
 
-    public synchronized void start(){
+    public synchronized void start() {
 
         instance = this;
 
-        if(running)
+        if (running)
             return;
         running = true;
         thread = new Thread(this);
         thread.start();
     }
 
-    public synchronized void stop(){
-        if(!running) return;
+    public synchronized void stop() {
+        if (!running) return;
         running = false;
         try {
             thread.join();
@@ -133,7 +142,7 @@ public class Game implements Runnable {
         }
     }
 
-    public KeyManager getKeyManager(){
+    public KeyManager getKeyManager() {
         return keyManager;
     }
 

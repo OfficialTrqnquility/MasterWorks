@@ -13,6 +13,11 @@ public class TileManager {
 
     public TileManager() {
         tiles = new Tile[256];
+        registerTile(new GrassTile());
+    }
+
+    public void registerTile(Tile tile) {
+        tiles[tile.getId()] = tile;
     }
 
     public Tile getTile(int id) throws NoTileException {

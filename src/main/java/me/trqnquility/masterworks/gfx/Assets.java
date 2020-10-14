@@ -13,7 +13,7 @@ public class Assets {
     public static BufferedImage[] player_hit;
 
     public static void init(){
-        SpriteSheet sheet = new SpriteSheet(Utils.loadImage("/textures/sheet.png"), width, height);
+        SpriteSheet sheet = new SpriteSheet(Utils.loadImage("/textures/textures.png"), width, height);
 
         player_down = new BufferedImage[2];
         player_up = new BufferedImage[2];

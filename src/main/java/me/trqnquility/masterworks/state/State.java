@@ -1,6 +1,7 @@
 package me.trqnquility.masterworks.state;
 
 import me.trqnquility.masterworks.Tickable.Tickable;
+import me.trqnquility.masterworks.exceptions.NoTileException;
 
 import java.awt.*;
 
@@ -19,5 +20,5 @@ public abstract class State implements Tickable {
     @Override
     public abstract void tick();
 
-    public abstract void render(Graphics g);
+    public abstract void render(Graphics g) throws NoTileException;
 }

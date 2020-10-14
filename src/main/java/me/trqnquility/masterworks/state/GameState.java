@@ -2,6 +2,7 @@ package me.trqnquility.masterworks.state;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.trqnquility.masterworks.exceptions.NoTileException;
 import me.trqnquility.masterworks.worlds.World;
 
 import java.awt.*;
@@ -23,7 +24,7 @@ public class GameState extends State {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render(Graphics g) throws NoTileException {
         world.render(g);
     }
 }

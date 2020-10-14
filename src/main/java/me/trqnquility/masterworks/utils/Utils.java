@@ -36,8 +36,7 @@ public class Utils {
     public static BufferedImage loadImage(String path) {
 
         try {
-
-            return ImageIO.read(Utils.class.getResource("src/main/resources/" + path));
+            return ImageIO.read(Utils.class.getResourceAsStream(path));
 
         } catch (IOException e) {
 
