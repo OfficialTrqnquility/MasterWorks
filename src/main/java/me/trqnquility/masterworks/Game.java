@@ -7,7 +7,9 @@ import me.trqnquility.masterworks.exceptions.NoStateException;
 import me.trqnquility.masterworks.exceptions.NoTileException;
 import me.trqnquility.masterworks.gfx.Assets;
 import me.trqnquility.masterworks.keymanager.KeyManager;
+import me.trqnquility.masterworks.mouse.MouseManager;
 import me.trqnquility.masterworks.state.GameState;
+import me.trqnquility.masterworks.state.MenuState;
 import me.trqnquility.masterworks.state.State;
 import me.trqnquility.masterworks.worlds.World;
 
@@ -30,14 +32,14 @@ public class Game implements Runnable {
     private Graphics graphics;
 
     private KeyManager keyManager;
-
-    private int i = 0;
+    private MouseManager mouseManager;
 
     public Game(String title, int width, int height) {
         this.width = width;
         this.height = height;
         this.title = title;
         keyManager = new KeyManager();
+        mouseManager = new MouseManager();
     }
 
     private void init() {
@@ -46,7 +48,12 @@ public class Game implements Runnable {
 
         display = new Display(title, width, height);
 
-        State.setState(new GameState(new World("worlds/overworld.txt")));
+        display.getFrame().addMouseListener(mouseManager);
+        display.getFrame().addMouseMotionListener(mouseManager);
+        display.getCanvas().addMouseListener(mouseManager);
+        display.getCanvas().addMouseMotionListener(mouseManager);
+
+        State.setState(new MenuState());
 
     }
 

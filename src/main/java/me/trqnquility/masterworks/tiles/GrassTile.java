@@ -4,10 +4,18 @@ import me.trqnquility.masterworks.gfx.Assets;
 
 import java.awt.image.BufferedImage;
 
-public class GrassTile extends Tile{
+public class GrassTile extends Tile {
 
     public GrassTile() {
-        super(new BufferedImage[]{Assets.grass}, 0);
+        super(new BufferedImage[]{Assets.grass,
+                Assets.grassTopLeft,
+                Assets.grassTop,
+                Assets.grassTopRight,
+                Assets.grassLeft,
+                Assets.grassRight,
+                Assets.grassBottomLeft,
+                Assets.grassBottom,
+                Assets.grassBottomRight}, 0);
     }
 
     @Override

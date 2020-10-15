@@ -16,6 +16,7 @@ public class TileManager {
         tiles = new Tile[256];
         registerTile(new GrassTile());
         registerTile(new DirtTile());
+        registerTile(new ForestTile());
     }
 
     public void registerTile(Tile tile) {

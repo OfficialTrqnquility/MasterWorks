@@ -1,5 +1,7 @@
 package me.trqnquility.masterworks.display;
 
+import me.trqnquility.masterworks.mouse.MouseManager;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -27,6 +29,7 @@ public class Display {
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		frame.addMouseListener(new MouseManager());
 
 		canvas = new Canvas();
 		Dimension dimension = new Dimension(width, height);

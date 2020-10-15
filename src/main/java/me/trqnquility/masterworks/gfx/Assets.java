@@ -8,7 +8,9 @@ public class Assets {
 
     private static final int width = 16, height = 16;
 
-    public static BufferedImage dirt, grass, grassLeft, grassRight, grassTop, grassBottom, grassTopLeft, grassTopRight, grassBottomLeft, grassBottomRight;
+    public static BufferedImage grass, grassLeft, grassRight, grassTop, grassBottom, grassTopLeft, grassTopRight, grassBottomLeft, grassBottomRight;
+    public static BufferedImage dirt, dirtTopleft, dirtTopRight, dirtBottomLeft, dirtBottomRight;
+    public static BufferedImage forest;
     public static BufferedImage[] player_down, player_up, player_left, player_right;
     public static BufferedImage[] player_hit;
 
@@ -34,11 +36,17 @@ public class Assets {
         grassTop = environmentsheet.crop(width, 0);
         grassTopRight = environmentsheet.crop(width * 2, 0);
         grassLeft = environmentsheet.crop(0, height);
-        grassRight = environmentsheet.crop(0, height * 3);
-        grassTopLeft = environmentsheet.crop(0, height * 4);
-        grassTop = environmentsheet.crop(width, height * 4);
-        grassTopRight = environmentsheet.crop(width * 2, height * 4);
+        grassRight = environmentsheet.crop(width * 2, height);
+        grassBottomLeft = environmentsheet.crop(0, height * 2);
+        grassBottom = environmentsheet.crop(width, height * 2);
+        grassBottomRight = environmentsheet.crop(width * 2, height * 2);
         dirt = environmentsheet.crop(width, height);
+        dirtTopleft = environmentsheet.crop(width * 3, 0);
+        dirtTopRight = environmentsheet.crop(width * 4, 0);
+        dirtBottomLeft = environmentsheet.crop(width * 3, height);
+        dirtBottomRight = environmentsheet.crop(width * 4, height);
+        forest = environmentsheet.crop(width * 7, height * 4);
+
     }
 
 
