@@ -4,19 +4,19 @@ import me.trqnquility.masterworks.gfx.Assets;
 
 import java.awt.image.BufferedImage;
 
-public class GrassTile extends Tile{
+public class DirtTile extends Tile {
 
-    public GrassTile() {
-        super(new BufferedImage[]{Assets.grass}, 0);
-    }
 
-    @Override
-    public void tick(int x, int y) {
-
+    public DirtTile() {
+        super(new BufferedImage[]{Assets.dirt}, 1);
     }
 
     @Override
     boolean isSolid() {
         return false;
+    }
+
+    @Override
+    public void tick(int x, int y) {
     }
 }

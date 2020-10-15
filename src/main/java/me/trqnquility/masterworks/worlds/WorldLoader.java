@@ -8,7 +8,7 @@ public class WorldLoader {
 
     private String tokens[];
     private int width, height, playerSpawnx, playerSpawnY;
-    private int[][] tiles;
+    private String[][] tiles;
 
     public WorldLoader(String worldFile) {
 
@@ -18,17 +18,17 @@ public class WorldLoader {
         playerSpawnx = Utils.parseInt(tokens[2]);
         playerSpawnY = Utils.parseInt(tokens[3]);
 
-        tiles = new int[width][height];
-        for(int y = 0;y < height;y++){
-            for(int x = 0;x < width;x++){
-                tiles[x][y] = Utils.parseInt(tokens[(x + y * width + 4)]);
+        tiles = new String[width][height];
+        for(int y = 0;y < height;y++) {
+            for(int x = 0;x < width;x++) {
+                tiles[x][y] = tokens[(x + y * width + 4)];
             }
         }
 
     }
 
 
-    public int[][] getTiles() {
+    public String[][] getTiles() {
         return tiles;
     }
 

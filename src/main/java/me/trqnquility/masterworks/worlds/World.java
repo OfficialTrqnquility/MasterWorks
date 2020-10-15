@@ -1,18 +1,21 @@
 package me.trqnquility.masterworks.worlds;
 
 
+import lombok.Getter;
 import me.trqnquility.masterworks.Game;
 import me.trqnquility.masterworks.exceptions.NoTileException;
 import me.trqnquility.masterworks.tiles.Tile;
 import me.trqnquility.masterworks.tiles.TileManager;
+import me.trqnquility.masterworks.utils.Utils;
 
 import java.awt.*;
 
+@Getter
 public class World {
 
     private int width, height, playerSpawnX, playerSpawnY;
 
-    private int[][] tiles;
+    private String[][] tiles;
 
     public World(String path) {
         WorldLoader worldLoader = new WorldLoader(path);
@@ -37,8 +40,8 @@ public class World {
         for (int row = 0; row < tiles.length; row++) {
 
             for (int col = 0; col < tiles[row].length; col++) {
-
-                getTile(row, col).render(g, row * Game.getInstance().height / height, col * Game.getInstance().width / width);
+                int damage = Utils.parseInt(tiles[row][col].split(":").length <= 1 ? "0" : tiles[row][col].split(":")[1]);
+                getTile(row, col).render(g, row * Game.getInstance().height / height, col * Game.getInstance().width / width, damage);
             }
 
         }

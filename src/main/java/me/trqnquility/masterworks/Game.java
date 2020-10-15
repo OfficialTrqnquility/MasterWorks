@@ -31,6 +31,8 @@ public class Game implements Runnable {
 
     private KeyManager keyManager;
 
+    private int i = 0;
+
     public Game(String title, int width, int height) {
         this.width = width;
         this.height = height;
