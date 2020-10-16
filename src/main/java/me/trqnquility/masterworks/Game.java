@@ -5,6 +5,8 @@ import lombok.SneakyThrows;
 import me.trqnquility.masterworks.display.Display;
 import me.trqnquility.masterworks.exceptions.NoStateException;
 import me.trqnquility.masterworks.exceptions.NoTileException;
+import me.trqnquility.masterworks.generator.NoiseStrategy;
+import me.trqnquility.masterworks.generator.impl.PerlinNoiseStrategy;
 import me.trqnquility.masterworks.gfx.Assets;
 import me.trqnquility.masterworks.keymanager.KeyManager;
 import me.trqnquility.masterworks.mouse.MouseManager;
