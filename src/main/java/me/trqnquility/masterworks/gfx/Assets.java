@@ -13,6 +13,7 @@ public class Assets {
     public static BufferedImage water;
     public static BufferedImage darkWater, waterToLightBottomLeft, waterToLightLeft, waterToLightRight, waterToLightBottom, waterToDarkTopRight, waterToDarkTop, waterToDarkBottomLeft, waterToDarkTopLeft;
     public static BufferedImage dock, dockCenter, dockDown, dockSide, dockFeet, dockFeetLeft, dockFeetRight, dockLeft, dockRight;
+    public static BufferedImage beach, beachToWaterdown;
     public static BufferedImage[] player_down, player_up, player_left, player_right;
     public static BufferedImage[] player_hit;
 
@@ -57,6 +58,9 @@ public class Assets {
         dockFeetLeft = tileSheet.crop(width * 4, height * 21);
         dockLeft = tileSheet.crop(width * 4, height * 17);
         dockRight = tileSheet.crop(width * 5, height * 17);
+
+        beach = tileSheet.crop(width * 4, height * 6);
+        beachToWaterdown = tileSheet.crop(width * 7, height * 25);
 
 
 
