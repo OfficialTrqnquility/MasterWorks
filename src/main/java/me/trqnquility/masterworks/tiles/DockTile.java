@@ -4,10 +4,10 @@ import me.trqnquility.masterworks.gfx.Assets;
 
 import java.awt.image.BufferedImage;
 
-public class GrassTile extends Tile {
+public class DockTile extends Tile {
 
-    public GrassTile() {
-        super(new BufferedImage[]{Assets.grass,}, 0);
+    public DockTile() {
+        super(new BufferedImage[]{Assets.dock, Assets.dockCenter, Assets.dockDown, Assets.dockSide, Assets.dockFeet, Assets.dockFeetLeft, Assets.dockFeetRight, Assets.dockLeft, Assets.dockRight}, 3);
     }
 
     @Override

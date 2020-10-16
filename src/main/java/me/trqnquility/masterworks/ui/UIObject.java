@@ -3,6 +3,7 @@ package me.trqnquility.masterworks.ui;
 import lombok.Getter;
 import me.trqnquility.masterworks.Tickable.Tickable;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 
 @Getter
@@ -46,5 +47,9 @@ public abstract class UIObject implements Tickable {
 
     @Override
     public void tick() {
+    }
+
+    public void render(Graphics g) {
+
     }
 }

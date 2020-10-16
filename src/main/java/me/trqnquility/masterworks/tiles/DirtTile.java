@@ -8,11 +8,7 @@ public class DirtTile extends Tile {
 
 
     public DirtTile() {
-        super(new BufferedImage[]{Assets.dirt,
-                Assets.dirtTopleft,
-                Assets.dirtTopRight,
-                Assets.dirtBottomLeft,
-                Assets.dirtBottomRight}, 1);
+        super(new BufferedImage[]{Assets.dirt}, 1);
     }
 
     @Override

@@ -8,10 +8,8 @@ import me.trqnquility.masterworks.exceptions.NoTileException;
 import me.trqnquility.masterworks.gfx.Assets;
 import me.trqnquility.masterworks.keymanager.KeyManager;
 import me.trqnquility.masterworks.mouse.MouseManager;
-import me.trqnquility.masterworks.state.GameState;
 import me.trqnquility.masterworks.state.MenuState;
 import me.trqnquility.masterworks.state.State;
-import me.trqnquility.masterworks.worlds.World;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
