@@ -26,6 +26,8 @@ public abstract class Tile {
         g.drawImage(images[data], x, y, TILEWIDTH, TILEHEIGHT, null);
     }
 
-    abstract boolean isSolid();
+    public boolean isSolid() {
+        return false;
+    }
 
 }

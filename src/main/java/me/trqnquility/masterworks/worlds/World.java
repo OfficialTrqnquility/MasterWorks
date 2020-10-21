@@ -4,6 +4,7 @@ package me.trqnquility.masterworks.worlds;
 import lombok.Getter;
 import me.trqnquility.masterworks.Game;
 import me.trqnquility.masterworks.exceptions.NoTileException;
+import me.trqnquility.masterworks.location.Position;
 import me.trqnquility.masterworks.tiles.Tile;
 import me.trqnquility.masterworks.tiles.TileManager;
 import me.trqnquility.masterworks.utils.Utils;
@@ -30,9 +31,11 @@ public class World {
 
     public Tile getTile(int x, int y) throws NoTileException {
 
+        if (x < 0 || y < 0 || x >= width || y>= height) return TileManager.getInstance().getTile("0:0");
+
         Tile tile = TileManager.getInstance().getTile(tiles[x][y]);
 
-        return tile == null ? null : tile;
+        return tile == null ? TileManager.getInstance().getTile("0:0") : tile;
     }
 
     public void render(Graphics g) throws NoTileException {
