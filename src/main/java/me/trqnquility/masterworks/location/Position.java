@@ -1,11 +1,5 @@
 package me.trqnquility.masterworks.location;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-
-
 public class Position {
 
     public Position(final int x, final int y, final int width, final int height) {
