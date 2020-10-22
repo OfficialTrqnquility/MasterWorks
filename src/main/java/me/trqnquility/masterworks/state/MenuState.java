@@ -21,7 +21,6 @@ public class MenuState extends State {
         uiObjects.add(new UIButton( (Game.getInstance().width - 500) / 2, (Game.getInstance().height - 250) / 2, 500, 250, Assets.startButton) {
             @Override
             protected void onClick() {
-                System.out.println("click");
                 State.setState(new GameState(new World("worlds/tileworld.txt")));
             }
 
