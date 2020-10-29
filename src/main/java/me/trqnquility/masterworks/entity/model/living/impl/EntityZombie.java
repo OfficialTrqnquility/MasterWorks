@@ -5,6 +5,7 @@ import me.trqnquility.masterworks.entity.model.living.LivingEntity;
 import me.trqnquility.masterworks.location.Position;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Map;
 
@@ -33,4 +34,13 @@ public final class EntityZombie extends LivingEntity {
 		return null;
 	}
 
+	@Override
+	public void render(@NotNull Graphics graphics) {
+
+	}
+
+	@Override
+	public void tick() {
+
+	}
 }

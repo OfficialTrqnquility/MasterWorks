@@ -1,6 +1,6 @@
 package me.trqnquility.masterworks.state;
 
-import me.trqnquility.masterworks.Tickable.Tickable;
+import me.trqnquility.masterworks.tickable.Tickable;
 import me.trqnquility.masterworks.exceptions.NoTileException;
 
 import java.awt.*;

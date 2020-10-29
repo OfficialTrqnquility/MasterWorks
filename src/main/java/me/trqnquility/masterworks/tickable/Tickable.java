@@ -1,4 +1,4 @@
-package me.trqnquility.masterworks.Tickable;
+package me.trqnquility.masterworks.tickable;
 
 public interface Tickable {
 

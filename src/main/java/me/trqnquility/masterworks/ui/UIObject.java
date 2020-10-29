@@ -1,7 +1,7 @@
 package me.trqnquility.masterworks.ui;
 
 import lombok.Getter;
-import me.trqnquility.masterworks.Tickable.Tickable;
+import me.trqnquility.masterworks.tickable.Tickable;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
