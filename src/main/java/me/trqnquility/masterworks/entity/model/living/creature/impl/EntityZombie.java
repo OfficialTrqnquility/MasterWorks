@@ -1,7 +1,7 @@
-package me.trqnquility.masterworks.entity.model.living.impl;
+package me.trqnquility.masterworks.entity.model.living.creature.impl;
 
 import me.trqnquility.masterworks.boundingbox.BoundingBox;
-import me.trqnquility.masterworks.entity.model.living.LivingEntity;
+import me.trqnquility.masterworks.entity.model.living.creature.EntityCreature;
 import me.trqnquility.masterworks.location.Position;
 import org.jetbrains.annotations.NotNull;
 
@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Map;
 
-public final class EntityZombie extends LivingEntity {
+public final class EntityZombie extends EntityCreature {
 
 
 

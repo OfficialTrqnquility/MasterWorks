@@ -1,0 +1,8 @@
+package me.trqnquility.masterworks.entity.model.living.creature
+
+import me.trqnquility.masterworks.entity.model.living.LivingEntity
+import me.trqnquility.masterworks.location.Position
+
+abstract class EntityCreature(position: Position) : LivingEntity(position) {
+
+}
