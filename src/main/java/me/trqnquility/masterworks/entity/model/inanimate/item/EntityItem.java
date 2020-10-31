@@ -1,7 +1,7 @@
-package me.trqnquility.masterworks.entity.model.living.human.impl;
+package me.trqnquility.masterworks.entity.model.inanimate.item;
 
 import me.trqnquility.masterworks.boundingbox.BoundingBox;
-import me.trqnquility.masterworks.entity.model.living.human.EntityHuman;
+import me.trqnquility.masterworks.entity.model.inanimate.InanimateEntity;
 import me.trqnquility.masterworks.location.Position;
 import org.jetbrains.annotations.NotNull;
 
@@ -9,21 +9,20 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Map;
 
-public class EntityPlayer extends EntityHuman {
+public class EntityItem extends InanimateEntity {
 
-    public EntityPlayer(@NotNull Position position, @NotNull BoundingBox boundingBox) {
+    public EntityItem(@NotNull Position position, @NotNull BoundingBox boundingBox) {
         super(position, boundingBox);
+    }
+
+    @Override
+    public void onCollide() {
+
     }
 
     @Override
     public int entityId() {
         return 0;
-    }
-
-    @NotNull
-    @Override
-    public BoundingBox entityBoundingBox() {
-        return null;
     }
 
     @NotNull

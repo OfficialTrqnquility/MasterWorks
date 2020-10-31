@@ -3,6 +3,7 @@ package me.trqnquility.masterworks.entity.model.living.creature.impl;
 import me.trqnquility.masterworks.boundingbox.BoundingBox;
 import me.trqnquility.masterworks.entity.model.living.creature.EntityCreature;
 import me.trqnquility.masterworks.location.Position;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -13,8 +14,8 @@ public final class EntityZombie extends EntityCreature {
 
 
 
-	public EntityZombie(@NotNull Position position) {
-		super(position);
+	public EntityZombie(@NotNull Position position, @NotNull BoundingBox boundingBox) {
+		super(position, boundingBox);
 	}
 
 	@Override
