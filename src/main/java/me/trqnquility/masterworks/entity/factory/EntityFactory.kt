@@ -9,7 +9,7 @@ object EntityFactory {
 
     fun newLivingEntity(type: LivingEntityType, position: Position): LivingEntity {
         when (type) {
-            LivingEntityType.ZOMBIE -> return EntityZombie()
+            LivingEntityType.ZOMBIE -> return EntityZombie(position)
         }
     }
 

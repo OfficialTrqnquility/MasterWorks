@@ -1,6 +1,7 @@
 package me.trqnquility.masterworks.display;
 
 import me.trqnquility.masterworks.mouse.MouseManager;
+import me.trqnquility.masterworks.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +31,8 @@ public class Display {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.addMouseListener(new MouseManager());
+
+		frame.setIconImage(new ImageIcon(Utils.loadImage("/textures/masterworksLogo.jpg")).getImage());
 
 		canvas = new Canvas();
 		Dimension dimension = new Dimension(width, height);
