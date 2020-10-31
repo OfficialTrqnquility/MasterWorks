@@ -1,5 +1,6 @@
 package me.trqnquility.masterworks.display;
 
+import me.trqnquility.masterworks.Game;
 import me.trqnquility.masterworks.mouse.MouseManager;
 import me.trqnquility.masterworks.utils.Utils;
 
@@ -30,7 +31,7 @@ public class Display {
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-		frame.addMouseListener(new MouseManager());
+		frame.addMouseListener(Game.getInstance().getMouseManager());
 
 		frame.setIconImage(new ImageIcon(Utils.loadImage("/textures/masterworksLogo.jpg")).getImage());
 
@@ -41,6 +42,7 @@ public class Display {
 		canvas.setMaximumSize(dimension);
 		canvas.setMinimumSize(dimension);
 		canvas.setFocusable(false);
+		canvas.addMouseListener(Game.getInstance().getMouseManager());
 
 		frame.add(canvas);
 		frame.pack();

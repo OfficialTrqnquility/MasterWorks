@@ -31,6 +31,7 @@ public class Game implements Runnable {
 
 	private KeyManager keyManager;
 	private MouseManager mouseManager;
+	private boolean devMode = false;
 
 	public Game(String title, int width, int height) {
 		this.width = width;
@@ -38,6 +39,7 @@ public class Game implements Runnable {
 		this.title = title;
 		keyManager = new KeyManager();
 		mouseManager = new MouseManager();
+		devMode = true;
 	}
 
 	private void init() {
@@ -66,7 +68,7 @@ public class Game implements Runnable {
 	}
 
 	@SneakyThrows
-	private void render() throws NoStateException, NoTileException {
+	private void render(int ticks) throws NoStateException, NoTileException {
 		bufferStrategy = display.getCanvas().getBufferStrategy();
 
 		State state = State.getState();
@@ -83,6 +85,11 @@ public class Game implements Runnable {
 		graphics.clearRect(0, 0, width, height); // Resets the screen
 		//Draw Here!
 		State.getState().render(graphics);
+
+		if (devMode) {
+			graphics.setColor(Color.WHITE);
+			graphics.drawString("FPS: " + ticks, 10, 20);
+		}
 		//End Drawing!
 		bufferStrategy.show();
 		graphics.dispose();
@@ -99,6 +106,7 @@ public class Game implements Runnable {
 		long lastTime = System.nanoTime();
 		long timer = 0;
 		int ticks = 0;
+		int tick = 0;
 
 		while (running) {
 			now = System.nanoTime();
@@ -109,7 +117,7 @@ public class Game implements Runnable {
 			if (delta >= 1) {
 				try {
 					tick(); // Updates everything
-					render(); // Renders everything
+					render(tick); // Renders everything
 				} catch (NoStateException | NoTileException e) {
 					e.printStackTrace();
 				}
@@ -118,6 +126,7 @@ public class Game implements Runnable {
 			}
 
 			if (timer >= 1000000000) {
+				tick = ticks;
 				System.out.println("Ticks and Frames: " + ticks);
 				ticks = 0;
 				timer = 0;
@@ -152,6 +161,8 @@ public class Game implements Runnable {
 	public KeyManager getKeyManager() {
 		return keyManager;
 	}
+
+	public MouseManager getMouseManager() { return mouseManager; }
 
 
 }
