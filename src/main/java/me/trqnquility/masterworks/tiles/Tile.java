@@ -22,6 +22,10 @@ public abstract class Tile {
 
     public abstract void tick(int x, int y);
 
+    public void onCollide() {
+
+    }
+
     public void render(Graphics g, int x, int y, int data) {
         g.drawImage(images[data], x, y, TILEWIDTH, TILEHEIGHT, null);
     }

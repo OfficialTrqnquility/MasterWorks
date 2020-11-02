@@ -1,6 +1,9 @@
 package me.trqnquility.masterworks.tiles;
 
 import me.trqnquility.masterworks.gfx.Assets;
+import me.trqnquility.masterworks.state.GameState;
+import me.trqnquility.masterworks.state.State;
+import me.trqnquility.masterworks.worlds.World;
 
 import java.awt.image.BufferedImage;
 
