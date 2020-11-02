@@ -3,9 +3,14 @@ package me.trqnquility.masterworks.entity.model.living.human.impl;
 import me.trqnquility.masterworks.Game;
 import me.trqnquility.masterworks.boundingbox.BoundingBox;
 import me.trqnquility.masterworks.entity.model.living.human.EntityHuman;
+import me.trqnquility.masterworks.exceptions.NoTileException;
 import me.trqnquility.masterworks.gfx.Assets;
 import me.trqnquility.masterworks.keymanager.KeyManager;
 import me.trqnquility.masterworks.location.Position;
+import me.trqnquility.masterworks.state.GameState;
+import me.trqnquility.masterworks.state.State;
+import me.trqnquility.masterworks.tiles.TileManager;
+import me.trqnquility.masterworks.worlds.World;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -17,14 +22,11 @@ public class EntityPlayer extends EntityHuman {
     //Temporary rendering code
     private BufferedImage playerImage = Assets.player_left[0];
 
+    private int xMove;
+    private int yMove;
+
     public EntityPlayer(@NotNull Position position, @NotNull BoundingBox boundingBox) {
         super(position, boundingBox, 3);
-    }
-
-    @NotNull
-    @Override
-    public BoundingBox entityBoundingBox() {
-        return null;
     }
 
     @NotNull
@@ -36,21 +38,67 @@ public class EntityPlayer extends EntityHuman {
     @Override
     public void render(@NotNull Graphics graphics) {
         graphics.drawImage(playerImage, entityPosition().getX(), entityPosition().getY(), playerImage.getWidth(), playerImage.getHeight(), null);
+        graphics.fillRect(entityPosition().getX() + entityBoundingBox().getXOffset(), entityPosition().getY() + entityBoundingBox().getYOffset(), entityBoundingBox().getWidth(), entityBoundingBox().getHeight());
     }
 
     @Override
     public void tick() {
+        move();
+    }
+
+    private final void move() {
         KeyManager keyManager = Game.getInstance().getKeyManager();
+        World world = ((GameState) State.getState()).getWorld();
+
         if (keyManager.up) {
-            getPosition().add(0, -getSpeed());
+            int leftX = (entityPosition().getX() + entityBoundingBox().getXOffset()) / 32;
+            int y = (entityPosition().getY() + entityBoundingBox().getYOffset() - getSpeed()) / 32;
+            int rightX = (entityPosition().getX() + entityBoundingBox().getXOffset() + entityBoundingBox().getWidth()) / 32;
+
+            if (!world.getTile(leftX, y).isSolid() && !world.getTile(rightX, y).isSolid()) {
+                yMove -= getSpeed();
+
+            }
+
         }
         if (keyManager.down) {
-            getPosition().add(0, getSpeed());
+
+            int leftX = (entityPosition().getX() + entityBoundingBox().getXOffset()) / 32;
+            int y = (entityPosition().getY() + entityBoundingBox().getYOffset() + entityBoundingBox().getHeight() + getSpeed()) / 32;
+            int rightX = (entityPosition().getX() + entityBoundingBox().getXOffset() + entityBoundingBox().getWidth()) / 32;
+
+            if (!world.getTile(leftX, y).isSolid() && !world.getTile(rightX, y).isSolid()) {
+                yMove += getSpeed();
+            }
+
         }
         if (keyManager.left) {
-            getPosition().add(-getSpeed(), 0);
+            int topY = (entityPosition().getY() + entityBoundingBox().getYOffset()) / 32;
+            int x = (entityPosition().getX() + entityBoundingBox().getXOffset() - getSpeed()) / 32;
+            int bottomY = (entityPosition().getY() + entityBoundingBox().getYOffset() + entityBoundingBox().getHeight()) / 32;
+
+            if (!world.getTile(x, bottomY).isSolid() && !world.getTile(x, topY).isSolid()) {
+                xMove -= getSpeed();
+            }
         }
         if (keyManager.right) {
-            getPosition().add(getSpeed(), 0);
-        }    }
+            int topY = (entityPosition().getY() + entityBoundingBox().getYOffset()) / 32;
+            int x = (entityPosition().getX() + entityBoundingBox().getXOffset() + entityBoundingBox().getWidth() + getSpeed()) / 32;
+            int bottomY = (entityPosition().getY() + entityBoundingBox().getYOffset() + entityBoundingBox().getHeight()) / 32;
+
+            if (!world.getTile(x, bottomY).isSolid() && !world.getTile(x, topY).isSolid()) {
+                xMove += getSpeed();
+            }
+        }
+
+
+        entityPosition().add(xMove, yMove);
+
+        xMove = 0;
+        yMove = 0;
+    }
+
+    private boolean isSolid(int x, int y) {
+        return ((GameState) State.getState()).getWorld().getTile(x, y).isSolid();
+    }
 }

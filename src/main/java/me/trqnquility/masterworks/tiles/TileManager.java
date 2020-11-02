@@ -25,9 +25,9 @@ public class TileManager {
         tiles[tile.getId()] = tile;
     }
 
-    public Tile getTile(String id) throws NoTileException {
+    public Tile getTile(String id) {
         Tile tile = tiles[Utils.parseInt(id.split(":")[0])];
-        if (tile == null) throw new NoTileException("Tile " + id + " does not exist.");
+        if (tile == null) return TileManager.getInstance().getTile("0:0");
         return tile;
     }
 

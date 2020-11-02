@@ -36,16 +36,16 @@ public class World {
 
     }
 
-    public Tile getTile(int x, int y) throws NoTileException {
+    public Tile getTile(int x, int y) {
 
         if (x < 0 || y < 0 || x >= width || y>= height) return TileManager.getInstance().getTile("0:0");
 
         Tile tile = TileManager.getInstance().getTile(tiles[x][y]);
 
-        return tile == null ? TileManager.getInstance().getTile("0:0") : tile;
+        return tile == null ? TileManager.getInstance().getTile("0:69") : tile;
     }
 
-    public void render(Graphics g) throws NoTileException {
+    public void render(Graphics g) {
 
         for (int row = 0; row < tiles.length; row++) {
 
