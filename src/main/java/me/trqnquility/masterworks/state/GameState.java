@@ -27,7 +27,7 @@ public class GameState extends State {
         this.world = world;
         this.camera = new GameCamera(world.getPlayerSpawnX(), world.getPlayerSpawnY());
 
-        player = (EntityPlayer) EntityFactory.INSTANCE.newLivingEntity(LivingEntityType.PLAYER, Position.of(world.getPlayerSpawnX(), world.getPlayerSpawnY()), BoundingBox.of(20, 17, 7, 15));
+        player = (EntityPlayer) EntityFactory.INSTANCE.newLivingEntity(LivingEntityType.PLAYER, Position.of(world.getPlayerSpawnX(), world.getPlayerSpawnY()), BoundingBox.of(20, 17, 7, 15), 10, 10,  true);
     }
 
 
@@ -54,5 +54,9 @@ public class GameState extends State {
         this.world = world;
         camera.set(world.getPlayerSpawnX(), world.getPlayerSpawnY());
         player.setPosition(Position.of(world.getPlayerSpawnX(), world.getPlayerSpawnY()));
+    }
+
+    public World getWorld() {
+        return world;
     }
 }

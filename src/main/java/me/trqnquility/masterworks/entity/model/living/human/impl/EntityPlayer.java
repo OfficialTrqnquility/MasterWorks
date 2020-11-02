@@ -3,13 +3,12 @@ package me.trqnquility.masterworks.entity.model.living.human.impl;
 import me.trqnquility.masterworks.Game;
 import me.trqnquility.masterworks.boundingbox.BoundingBox;
 import me.trqnquility.masterworks.entity.model.living.human.EntityHuman;
-import me.trqnquility.masterworks.exceptions.NoTileException;
 import me.trqnquility.masterworks.gfx.Assets;
+import me.trqnquility.masterworks.inventory.Inventory;
 import me.trqnquility.masterworks.keymanager.KeyManager;
 import me.trqnquility.masterworks.location.Position;
 import me.trqnquility.masterworks.state.GameState;
 import me.trqnquility.masterworks.state.State;
-import me.trqnquility.masterworks.tiles.TileManager;
 import me.trqnquility.masterworks.worlds.World;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,8 +24,12 @@ public class EntityPlayer extends EntityHuman {
     private int xMove;
     private int yMove;
 
-    public EntityPlayer(@NotNull Position position, @NotNull BoundingBox boundingBox) {
-        super(position, boundingBox, 3);
+    private Inventory inventory;
+
+    public EntityPlayer(@NotNull Position position, @NotNull BoundingBox boundingBox, @NotNull int health, @NotNull int damage) {
+        super(position, boundingBox, 3, health, damage, true);
+
+        inventory = new Inventory(5);
     }
 
     @NotNull
@@ -58,11 +61,11 @@ public class EntityPlayer extends EntityHuman {
             if (!world.getTile(leftX, y).isSolid()) {
                 if (!world.getTile(rightX, y).isSolid()) {
                     yMove -= getSpeed();
-                } else world.getTile(rightX, y).onCollide();
+                } else world.getTile(rightX, y).onCollide(this);
 
-                world.getTile(leftX, y).onCollide();
+                world.getTile(leftX, y).onCollide(this);
 
-            } else world.getTile(leftX, y).onCollide();
+            } else world.getTile(leftX, y).onCollide(this);
 
         }
         if (keyManager.down) {
@@ -74,11 +77,11 @@ public class EntityPlayer extends EntityHuman {
             if (!world.getTile(leftX, y).isSolid()) {
                 if (!world.getTile(rightX, y).isSolid()) {
                     yMove += getSpeed();
-                } else world.getTile(rightX, y).onCollide();
+                } else world.getTile(rightX, y).onCollide(this);
 
-                world.getTile(leftX, y).onCollide();
+                world.getTile(leftX, y).onCollide(this);
 
-            } else world.getTile(leftX, y).onCollide();
+            } else world.getTile(leftX, y).onCollide(this);
 
         }
         if (keyManager.left) {
@@ -100,6 +103,7 @@ public class EntityPlayer extends EntityHuman {
             }
         }
 
+        super.tick();
 
         entityPosition().add(xMove, yMove);
 
@@ -109,5 +113,14 @@ public class EntityPlayer extends EntityHuman {
 
     private boolean isSolid(int x, int y) {
         return ((GameState) State.getState()).getWorld().getTile(x, y).isSolid();
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    @Override
+    public void onCollide() {
+
     }
 }

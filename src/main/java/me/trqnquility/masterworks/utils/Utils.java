@@ -1,5 +1,8 @@
 package me.trqnquility.masterworks.utils;
 
+import me.trqnquility.masterworks.boundingbox.BoundingBox;
+import me.trqnquility.masterworks.location.Position;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -56,5 +59,17 @@ public class Utils {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    public static boolean isOverlapping(Position position1, Position position2, BoundingBox boundingBox1, BoundingBox boundingBox2) {
+        if (position1.getY() + boundingBox1.getYOffset() < position2.getY() + boundingBox2.getYOffset() + boundingBox2.getHeight()
+                || position1.getY() + boundingBox1.getYOffset() + boundingBox1.getHeight() > position2.getY() + boundingBox2.getYOffset()) {
+            return false;
+        }
+        if (position1.getX() + boundingBox1.getXOffset() + boundingBox1.getWidth() < position2.getX() + boundingBox2.getXOffset()
+                || position1.getX() + boundingBox1.getXOffset() > position2.getX() + boundingBox2.getWidth() + boundingBox2.getXOffset()) {
+            return false;
+        }
+        return true;
     }
 }

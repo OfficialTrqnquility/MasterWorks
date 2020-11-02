@@ -14,8 +14,8 @@ public final class EntityZombie extends EntityCreature {
 
 
 
-	public EntityZombie(@NotNull Position position, @NotNull BoundingBox boundingBox) {
-		super(position, boundingBox, 10);
+	public EntityZombie(@NotNull Position position, @NotNull BoundingBox boundingBox, int health, int damage, boolean isSolid) {
+		super(position, boundingBox, 10, health, damage, isSolid);
 	}
 
 	@NotNull
@@ -37,6 +37,11 @@ public final class EntityZombie extends EntityCreature {
 
 	@Override
 	public void tick() {
+		super.tick();
+	}
+
+	@Override
+	public void onCollide() {
 
 	}
 }

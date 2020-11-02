@@ -12,10 +12,10 @@ import me.trqnquility.masterworks.location.Position
 
 object EntityFactory {
 
-    fun newLivingEntity(type: LivingEntityType, position: Position, boundingBox: BoundingBox): LivingEntity {
+    fun newLivingEntity(type: LivingEntityType, position: Position, boundingBox: BoundingBox, health: Int, damage: Int, isSolid: Boolean): LivingEntity {
         return when (type) {
-            LivingEntityType.ZOMBIE -> EntityZombie(position, boundingBox)
-            LivingEntityType.PLAYER -> EntityPlayer(position, boundingBox)
+            LivingEntityType.ZOMBIE -> EntityZombie(position, boundingBox, health, damage, isSolid)
+            LivingEntityType.PLAYER -> EntityPlayer(position, boundingBox, health, damage)
         }
     }
 

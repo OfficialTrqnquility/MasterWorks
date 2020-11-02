@@ -5,7 +5,7 @@ import me.trqnquility.masterworks.entity.model.Entity
 import me.trqnquility.masterworks.location.Position
 import java.util.*
 
-abstract class InanimateEntity constructor(var position: Position, var boundingBox: BoundingBox) : Entity() {
+abstract class InanimateEntity constructor(var position: Position, var boundingBox: BoundingBox, isSolid: Boolean) : Entity(isSolid) {
 
 
     override fun entityPosition(): Position {
@@ -15,7 +15,5 @@ abstract class InanimateEntity constructor(var position: Position, var boundingB
     override fun entityBoundingBox(): BoundingBox {
         return boundingBox
     }
-
-    abstract fun onCollide()
 
 }

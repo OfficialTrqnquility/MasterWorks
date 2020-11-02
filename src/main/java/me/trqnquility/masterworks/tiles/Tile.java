@@ -1,6 +1,7 @@
 package me.trqnquility.masterworks.tiles;
 
 import lombok.Getter;
+import me.trqnquility.masterworks.entity.model.living.LivingEntity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -22,7 +23,7 @@ public abstract class Tile {
 
     public abstract void tick(int x, int y);
 
-    public void onCollide() {
+    public void onCollide(LivingEntity entity) {
 
     }
 

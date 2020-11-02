@@ -1,11 +1,11 @@
 package me.trqnquility.masterworks.worlds;
 
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Maps;
 import lombok.Getter;
 import me.trqnquility.masterworks.Game;
 import me.trqnquility.masterworks.entity.model.Entity;
-import me.trqnquility.masterworks.exceptions.NoTileException;
+import me.trqnquility.masterworks.entity.model.inanimate.item.EntityItem;
 import me.trqnquility.masterworks.state.GameState;
 import me.trqnquility.masterworks.state.State;
 import me.trqnquility.masterworks.tiles.Tile;
@@ -13,7 +13,8 @@ import me.trqnquility.masterworks.tiles.TileManager;
 import me.trqnquility.masterworks.utils.Utils;
 
 import java.awt.*;
-import java.util.Set;
+import java.util.Map;
+import java.util.UUID;
 
 @Getter
 public class World {
@@ -22,7 +23,7 @@ public class World {
 
     private String[][] tiles;
 
-    private Set<Entity> entities;
+    private Map<UUID, Entity> entities;
 
     public World(String path) {
         WorldLoader worldLoader = new WorldLoader(path);
@@ -32,17 +33,17 @@ public class World {
         playerSpawnX = worldLoader.getPlayerSpawnX();
         playerSpawnY = worldLoader.getPlayerSpawnY();
         tiles = worldLoader.getTiles();
-        entities = Sets.newConcurrentHashSet();
+        entities = Maps.newConcurrentMap();
 
     }
 
     public Tile getTile(int x, int y) {
 
-        if (x < 0 || y < 0 || x >= width || y>= height) return TileManager.getInstance().getTile("0:0");
+        if (x < 0 || y < 0 || x >= width || y >= height) return TileManager.getInstance().getTile("0:0");
 
         Tile tile = TileManager.getInstance().getTile(tiles[x][y]);
 
-        return tile == null ? TileManager.getInstance().getTile("0:69") : tile;
+        return tile == null ? TileManager.getInstance().getTile("0:0") : tile;
     }
 
     public void render(Graphics g) {
@@ -63,7 +64,7 @@ public class World {
 
     public void tick() {
 
-        for (Entity entity : entities) {
+        for (Entity entity : entities.values()) {
             if (entity.getNeedsTick()) {
                 entity.tick();
             }
@@ -73,5 +74,12 @@ public class World {
 
     }
 
+    public Entity getEntity(UUID uuid) {
+        return entities.get(uuid);
+    }
+
+    public Map<UUID, Entity> getEntities() {
+        return entities;
+    }
 
 }
