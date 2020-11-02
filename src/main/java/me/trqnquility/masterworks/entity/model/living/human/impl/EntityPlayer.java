@@ -15,11 +15,6 @@ public class EntityPlayer extends EntityHuman {
         super(position, boundingBox);
     }
 
-    @Override
-    public int entityId() {
-        return 0;
-    }
-
     @NotNull
     @Override
     public BoundingBox entityBoundingBox() {

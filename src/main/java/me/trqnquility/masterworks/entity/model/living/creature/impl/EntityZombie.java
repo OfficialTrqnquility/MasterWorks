@@ -18,11 +18,6 @@ public final class EntityZombie extends EntityCreature {
 		super(position, boundingBox);
 	}
 
-	@Override
-	public int entityId() {
-		return 0;
-	}
-
 	@NotNull
 	@Override
 	public BoundingBox entityBoundingBox() {

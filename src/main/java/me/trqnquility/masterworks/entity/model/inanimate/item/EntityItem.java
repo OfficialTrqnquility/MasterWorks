@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Map;
+import java.util.UUID;
 
 public class EntityItem extends InanimateEntity {
 
@@ -18,11 +19,6 @@ public class EntityItem extends InanimateEntity {
     @Override
     public void onCollide() {
 
-    }
-
-    @Override
-    public int entityId() {
-        return 0;
     }
 
     @NotNull
