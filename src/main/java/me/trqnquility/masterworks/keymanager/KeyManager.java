@@ -2,11 +2,12 @@ package me.trqnquility.masterworks.keymanager;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Arrays;
 
 public class KeyManager implements KeyListener {
 
     private boolean[] keys;
-    private boolean up, down, left, right;
+    public boolean up, down, left, right;
 
     public KeyManager() {
         keys = new boolean[256];

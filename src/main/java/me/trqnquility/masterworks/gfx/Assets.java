@@ -20,7 +20,7 @@ public class Assets {
     public static BufferedImage startButton;
 
     public static void init(){
-        SpriteSheet environmentsheet = new SpriteSheet(Utils.loadImage("/textures/envnironmenttextures.png"), width, height);
+        SpriteSheet playerSheet = new SpriteSheet(Utils.loadImage("/textures/textures.png"), width, height);
         SpriteSheet tileSheet = new SpriteSheet(Utils.loadImage("/textures/tilemap.png"), 32, 32);
 
         player_down = new BufferedImage[2];
@@ -34,7 +34,7 @@ public class Assets {
 //        player_up[1] = sheet.crop(width * 7, 0);
 //        player_right[0] = sheet.crop(width * 4, height);
 //        player_right[1] = sheet.crop(width * 5, height);
-//        player_left[0] = sheet.crop(width * 6, height);
+        player_left[0] = playerSheet.crop(width * 5, 0);
 //        player_left[1] = sheet.crop(width * 7, height);
 
         grass = tileSheet.crop(width, height * 2);

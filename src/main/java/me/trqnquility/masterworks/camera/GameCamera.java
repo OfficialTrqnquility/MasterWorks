@@ -7,16 +7,17 @@ import lombok.Setter;
 @Setter
 public class GameCamera {
 
-    @Getter
-    private static GameCamera instance;
+    private int x;
+    private int y;
 
-    private float x;
-    private float y;
-
-    public GameCamera(float x, float y) {
+    public GameCamera(int x, int y) {
         this.x = x;
         this.y = y;
 
-        instance = this;
+    }
+
+    public void set(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 }

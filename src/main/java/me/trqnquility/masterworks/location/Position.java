@@ -2,11 +2,9 @@ package me.trqnquility.masterworks.location;
 
 public class Position {
 
-    public Position(final int x, final int y, final int width, final int height) {
+    public Position(final int x, final int y) {
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
     }
 
     private int x = 0;
@@ -14,6 +12,10 @@ public class Position {
 
     private int width;
     private int height;
+
+    public static Position of(final int x, final int y) {
+        return new Position(x, y);
+    }
 
     public void add(int x, int y) {
         this.x += x;
@@ -48,11 +50,4 @@ public class Position {
         this.y = y;
     }
 
-    public void setWidth(final int width) {
-        this.width = width;
-    }
-
-    public void setHeight(final int height) {
-        this.height = height;
-    }
 }

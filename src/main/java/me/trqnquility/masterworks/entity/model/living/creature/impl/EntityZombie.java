@@ -15,7 +15,7 @@ public final class EntityZombie extends EntityCreature {
 
 
 	public EntityZombie(@NotNull Position position, @NotNull BoundingBox boundingBox) {
-		super(position, boundingBox);
+		super(position, boundingBox, 10);
 	}
 
 	@NotNull

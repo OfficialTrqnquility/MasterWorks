@@ -1,6 +1,5 @@
 package me.trqnquility.masterworks;
 
-import lombok.Getter;
 import lombok.SneakyThrows;
 import me.trqnquility.masterworks.display.Display;
 import me.trqnquility.masterworks.exceptions.NoStateException;
@@ -16,7 +15,6 @@ import java.awt.image.BufferStrategy;
 
 public class Game implements Runnable {
 
-	@Getter
 	private static Game instance;
 
 	private Display display;
@@ -163,6 +161,8 @@ public class Game implements Runnable {
 	}
 
 	public MouseManager getMouseManager() { return mouseManager; }
+
+	public static Game getInstance() { return instance; }
 
 
 }

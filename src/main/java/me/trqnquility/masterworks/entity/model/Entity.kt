@@ -10,6 +10,8 @@ import java.util.*
 abstract class Entity : Tickable {
     val id = UUID.randomUUID()
 
+    var needsTick = false
+
     fun entityId(): UUID {
         return id
     }

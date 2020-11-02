@@ -32,6 +32,7 @@ public class Display {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.addMouseListener(Game.getInstance().getMouseManager());
+		frame.addKeyListener(Game.getInstance().getKeyManager());
 
 		frame.setIconImage(new ImageIcon(Utils.loadImage("/textures/masterworksLogo.jpg")).getImage());
 
