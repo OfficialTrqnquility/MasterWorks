@@ -1,6 +1,7 @@
 package me.trqnquility.masterworks.inventory;
 
 import com.google.common.collect.Lists;
+import me.trqnquility.masterworks.Game;
 import me.trqnquility.masterworks.entity.model.inanimate.item.EntityItem;
 import me.trqnquility.masterworks.gfx.Assets;
 import me.trqnquility.masterworks.ui.UIOverlay;
@@ -19,7 +20,7 @@ public class Inventory extends UIOverlay {
     }
 
     public Inventory(int inventorySize) {
-        super(100, 100, 100, 100, Assets.beach);
+        super(Game.getInstance().width / 5 * 4,10, 117, 40, Assets.inventory);
         items = Lists.newArrayListWithCapacity(inventorySize - 1);
 
     }

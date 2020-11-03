@@ -16,12 +16,14 @@ public class Assets {
     public static BufferedImage beach, beachToWaterdown;
     public static BufferedImage[] player_down, player_up, player_left, player_right;
     public static BufferedImage[] player_hit;
+    public static BufferedImage inventory;
 
     public static BufferedImage startButton;
 
     public static void init(){
         SpriteSheet playerSheet = new SpriteSheet(Utils.loadImage("/textures/textures.png"), width, height);
         SpriteSheet tileSheet = new SpriteSheet(Utils.loadImage("/textures/tilemap.png"), 32, 32);
+        SpriteSheet uiSheet = new SpriteSheet(Utils.loadImage("/textures/ui_big_pieces.png"), 117, 40);
 
         player_down = new BufferedImage[2];
         player_up = new BufferedImage[2];
@@ -65,6 +67,8 @@ public class Assets {
 
 
         startButton = Utils.loadImage("/textures/startbutton.png");
+
+        inventory = uiSheet.crop(570, 370);
 
     }
 
