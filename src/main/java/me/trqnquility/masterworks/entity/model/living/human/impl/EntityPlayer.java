@@ -29,7 +29,7 @@ public class EntityPlayer extends EntityHuman {
     public EntityPlayer(@NotNull Position position, @NotNull BoundingBox boundingBox, @NotNull int health, @NotNull int damage) {
         super(position, boundingBox, 3, health, damage, true);
 
-        inventory = new Inventory(5);
+        inventory = new Inventory(3);
     }
 
     @NotNull
@@ -42,6 +42,7 @@ public class EntityPlayer extends EntityHuman {
     public void render(@NotNull Graphics graphics) {
         graphics.drawImage(playerImage, entityPosition().getX(), entityPosition().getY(), playerImage.getWidth(), playerImage.getHeight(), null);
         graphics.fillRect(entityPosition().getX() + entityBoundingBox().getXOffset(), entityPosition().getY() + entityBoundingBox().getYOffset(), entityBoundingBox().getWidth(), entityBoundingBox().getHeight());
+        inventory.render(graphics);
     }
 
     @Override
@@ -89,9 +90,14 @@ public class EntityPlayer extends EntityHuman {
             int x = (entityPosition().getX() + entityBoundingBox().getXOffset() - getSpeed()) / 32;
             int bottomY = (entityPosition().getY() + entityBoundingBox().getYOffset() + entityBoundingBox().getHeight()) / 32;
 
-            if (!world.getTile(x, bottomY).isSolid() && !world.getTile(x, topY).isSolid()) {
-                xMove -= getSpeed();
-            }
+            if (!world.getTile(x, bottomY).isSolid()) {
+                if (!world.getTile(x, topY).isSolid()) {
+                    xMove -= getSpeed();
+                } else world.getTile(x, topY).onCollide(this);
+
+                world.getTile(x, bottomY).onCollide(this);
+
+            } else world.getTile(x, bottomY).onCollide(this);
         }
         if (keyManager.right) {
             int topY = (entityPosition().getY() + entityBoundingBox().getYOffset()) / 32;
