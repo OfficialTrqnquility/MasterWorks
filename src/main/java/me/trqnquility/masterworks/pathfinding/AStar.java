@@ -7,6 +7,7 @@ import me.trqnquility.masterworks.worlds.World;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AStar {
 
@@ -19,9 +20,13 @@ public class AStar {
 
     public AStar(World world) {
         grid = new PathNode[20][20];
-        for (int y = 0; y < world.getHeight(); y++) {
-            for (int x = 0; x < world.getWidth(); x++) {
-                grid[y][x] = new PathNode(y, x, world.getTile(y, x).isSolid());
+        for (int y = 0; y < grid.length; y++) {
+            for (int x = 0; x < grid[0].length; x++) {
+                PathNode node = new PathNode(x, y, world.getTile(x, y).isSolid());
+                if (node.getClosed()) {
+                    System.out.println("closed = " + x + " " + y);
+                }
+                grid[y][x] = node;
             }
         }
     }
@@ -52,7 +57,7 @@ public class AStar {
             openList.remove(currentNode);
             closedList.add(currentNode);
 
-            for (PathNode neighbor : getNeighbors(currentNode)) {
+            for (PathNode neighbor : getNeighbors(currentNode).stream().filter(node -> !node.getClosed()).collect(Collectors.toList())) {
                 if (closedList.contains(neighbor)) continue;
                 if (neighbor.getClosed()) {
                     closedList.add(neighbor);

@@ -48,7 +48,7 @@ public class GameState extends State {
 //            }
 
         me.trqnquility.masterworks.pathfinding.AStar aStar = new me.trqnquility.masterworks.pathfinding.AStar(world);
-        path = aStar.findPath(0, 0, 5, 0);
+        path = aStar.findPath(0, 0, 3, 3);
         System.out.println(Arrays.toString(path.toArray()));
     }
 
@@ -90,7 +90,8 @@ public class GameState extends State {
                     color = Color.WHITE;
                 }
                     else color = Color.BLACK;
-                g.drawLine(node.getPreviousNode().getX() * 32 + 16, node.getPreviousNode().getY() * 32 - 16, node.getX() * 32 + 16, node.getY() * 32 - 16);
+                g.drawLine(node.getPreviousNode().getX() * 32, node.getPreviousNode().getY() * 32, node.getX() * 32, node.getY() * 32);
+                //g.drawLine(node.getPreviousNode().getX() * 32 + 16, node.getPreviousNode().getY() * 32 - 16, node.getX() * 32 + 16, node.getY() * 32 - 16);
             }
         }
 
