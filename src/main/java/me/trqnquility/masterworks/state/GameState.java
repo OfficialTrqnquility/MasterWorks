@@ -10,12 +10,15 @@ import me.trqnquility.masterworks.entity.model.living.LivingEntityType;
 import me.trqnquility.masterworks.entity.model.living.human.impl.EntityPlayer;
 import me.trqnquility.masterworks.exceptions.NoTileException;
 import me.trqnquility.masterworks.location.Position;
+import me.trqnquility.masterworks.pathfinding.PathNode;
 import me.trqnquility.masterworks.test.AStar;
 import me.trqnquility.masterworks.utils.Utils;
 import me.trqnquility.masterworks.worlds.World;
 
 import java.awt.*;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Getter
 @Setter
@@ -30,19 +33,27 @@ public class GameState extends State {
         this.world = world;
         this.camera = new GameCamera(world.getPlayerSpawnX(), world.getPlayerSpawnY());
 
-        player = (EntityPlayer) EntityFactory.INSTANCE.newLivingEntity(LivingEntityType.PLAYER, Position.of(world.getPlayerSpawnX(), world.getPlayerSpawnY()), BoundingBox.of(20, 17, 7, 15), 10, 10,  true);
+        player = (EntityPlayer) EntityFactory.INSTANCE.newLivingEntity(LivingEntityType.PLAYER, Position.of(world.getPlayerSpawnX(), world.getPlayerSpawnY()), BoundingBox.of(20, 17, 7, 15), 10, 10, true);
+
+
+    }
+    List<PathNode> path;
+    private void start() {
+//        int[][] tiles = new int[20][20];
 //
-//        int[][]tiles = new int[20][20];
-//        for (int row = 0; row < world.getTiles().length; row++) {
+//        for (int i = 0; i < 20; i++) {
+//            for (int ii = 0; ii < 20; ii++) {
+//                tiles[ii][i] = Utils.parseInt(world.getTiles()[ii][i].split(":")[0]);
 //
-//            for (int col = 0; col < world.getTiles()[row].length; col++) {
-//                int tile = Utils.parseInt(world.getTiles()[row][col].split(":")[0]);
-//                tiles[row][col] = tile;
 //            }
-//        }
-//
+
+        me.trqnquility.masterworks.pathfinding.AStar aStar = new me.trqnquility.masterworks.pathfinding.AStar(world);
+        path = aStar.findPath(0, 0, 5, 0);
+        System.out.println(Arrays.toString(path.toArray()));
+    }
+
 //        AStar as = new AStar(tiles, 0, 0, true);
-//        List<AStar.Node> path = as.findPathTo(15, 18);
+//        path = as.findPathTo(16, 10);
 //        if (path != null) {
 //            path.forEach((n) -> {
 //                System.out.print("[" + n.x + ", " + n.y + "] ");
@@ -50,39 +61,38 @@ public class GameState extends State {
 //            });
 //            System.out.printf("\nTotal cost: %.02f\n", path.get(path.size() - 1).g);
 //
-//            for (int[] maze_row : tiles) {
-//                for (int maze_entry : maze_row) {
-//                    switch (maze_entry) {
-//                        case 0:
-//                            System.out.print("_");
-//                            break;
-//                        case -1:
-//                            System.out.print("*");
-//                            break;
-//                        default:
-//                            System.out.print("#");
-//                    }
-//                }
-//                System.out.println();
-//            }
 //        }
-    }
 
+    boolean start = true;
 
     @Override
     public void tick() {
+        if (start) start();
+        start = false;
         Game.getInstance().getKeyManager().tick();
         world.tick();
     }
 
     @Override
-    public void render(Graphics g) throws NoTileException {
+    public void render(Graphics g) {
 
         Graphics2D graphics2D = (Graphics2D) g;
 
         graphics2D.translate(camera.getX(), camera.getY());
 
         world.render(g);
+        Color color = Color.BLACK;
+
+        for (PathNode node : path) {
+            if (node.getPreviousNode() != null) {
+                g.setColor(color);
+                if (color.equals(Color.BLACK)) {
+                    color = Color.WHITE;
+                }
+                    else color = Color.BLACK;
+                g.drawLine(node.getPreviousNode().getX() * 32 + 16, node.getPreviousNode().getY() * 32 - 16, node.getX() * 32 + 16, node.getY() * 32 - 16);
+            }
+        }
 
         graphics2D.translate(-camera.getX(), -camera.getY());
 

@@ -1,5 +1,9 @@
 package me.trqnquility.masterworks.test;
 
+import me.trqnquility.masterworks.state.GameState;
+import me.trqnquility.masterworks.state.State;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -112,17 +116,15 @@ public class AStar {
                         && this.now.x + x >= 0 && this.now.x + x < this.maze[0].length // check maze boundaries
                         && this.now.y + y >= 0 && this.now.y + y < this.maze.length
                         && this.maze[this.now.y + y][this.now.x + x] != -1 // check if square is walkable
+                        && !(((GameState) State.getState()).getWorld().getTile(this.now.x + x, this.now.y + y).isSolid())
                         && !findNeighborInList(this.open, node) && !findNeighborInList(this.closed, node)) { // if not already done
                     node.g = node.parent.g + 1.; // Horizontal/vertical cost = 1.0
                     node.g += maze[this.now.y + y][this.now.x + x]; // add movement cost for this square
 
-                    // diagonal cost = sqrt(hor_cost² + vert_cost²)
-                    // in this example the cost would be 12.2 instead of 11
-                        /*
+
                         if (diag && x != 0 && y != 0) {
                             node.g += .4;	// Diagonal movement cost = 1.4
                         }
-                        */
                     this.open.add(node);
                 }
             }
