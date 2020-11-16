@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AStar {
 
-    private final int MOVE_STRAIGHT_COST = 10, MOVE_DIAGONAL_COST = 14;
+    private static final int MOVE_STRAIGHT_COST = 10, MOVE_DIAGONAL_COST = 14;
 
     private PathNode[][] grid;
 
