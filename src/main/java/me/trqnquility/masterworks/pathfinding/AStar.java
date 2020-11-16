@@ -7,14 +7,13 @@ import me.trqnquility.masterworks.worlds.World;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AStar {
 
     private final int MOVE_STRAIGHT_COST = 10, MOVE_DIAGONAL_COST = 14;
 
     private PathNode[][] grid;
-    
+
     private List<PathNode> openList;
     private List<PathNode> closedList;
 
@@ -23,14 +22,11 @@ public class AStar {
         for (int y = 0; y < grid.length; y++) {
             for (int x = 0; x < grid[0].length; x++) {
                 PathNode node = new PathNode(x, y, world.getTile(x, y).isSolid());
-                if (node.getClosed()) {
-                    System.out.println("closed = " + x + " " + y);
-                }
                 grid[y][x] = node;
             }
         }
     }
-    
+
     public List<PathNode> findPath(int startX, int startY, int endX, int endY) {
         PathNode startNode = grid[startY][startX];
         PathNode endNode = grid[endY][endX];
@@ -50,14 +46,22 @@ public class AStar {
         startNode.setHCost(calculateDistance(startNode, endNode));
         startNode.calculateFCost();
 
-        while(!openList.isEmpty()) {
-            PathNode currentNode =  getLowestFCostNode(openList);
+        while (!openList.isEmpty()) {
+            PathNode currentNode = getLowestFCostNode(openList);
             if (currentNode.getX() == endX && currentNode.getY() == endY) return calculatePath(endNode);
 
             openList.remove(currentNode);
             closedList.add(currentNode);
 
-            for (PathNode neighbor : getNeighbors(currentNode).stream().filter(node -> !node.getClosed()).collect(Collectors.toList())) {
+            List<PathNode> neighbors = getNeighbors(currentNode, true);
+            for (PathNode neighbor : neighbors) {
+                if (neighbor.getClosed()) {
+                    neighbors = getNeighbors(currentNode, false);
+                    break;
+                }
+            }
+
+            for (PathNode neighbor : neighbors) {
                 if (closedList.contains(neighbor)) continue;
                 if (neighbor.getClosed()) {
                     closedList.add(neighbor);
@@ -65,7 +69,6 @@ public class AStar {
                 }
 
                 double tentativeGCost = currentNode.getGCost() + calculateDistance(currentNode, neighbor);
-                System.out.println(tentativeGCost);
                 if (tentativeGCost < neighbor.getGCost()) {
                     neighbor.setPreviousNode(currentNode);
                     neighbor.setGCost(tentativeGCost);
@@ -77,30 +80,34 @@ public class AStar {
                     }
                 }
             }
-            System.out.println("-----");
         }
         //No path found
         return null;
     }
 
-    private List<PathNode> getNeighbors(PathNode centerNode) {
+    private List<PathNode> getNeighbors(PathNode centerNode, boolean diagonal) {
         List<PathNode> neighborList = Lists.newArrayList();
 
         if (centerNode.getX() - 1 >= 0) {
             neighborList.add(getNode(centerNode.getX() - 1, centerNode.getY()));
 
-            if (centerNode.getY() - 1 >= 0) neighborList.add(getNode(centerNode.getX() - 1, centerNode.getY() - 1));
+            if (diagonal) {
+                if (centerNode.getY() - 1 >= 0) neighborList.add(getNode(centerNode.getX() - 1, centerNode.getY() - 1));
 
-            if (centerNode.getY() + 1  < ((GameState) State.getState()).getWorld().getHeight()) neighborList.add(getNode(centerNode.getX() - 1, centerNode.getY() + 1));
+                if (centerNode.getY() + 1 < ((GameState) State.getState()).getWorld().getHeight())
+                    neighborList.add(getNode(centerNode.getX() - 1, centerNode.getY() + 1));
+            }
         }
 
         if (centerNode.getX() + 1 < ((GameState) State.getState()).getWorld().getWidth()) {
             neighborList.add(getNode(centerNode.getX() + 1, centerNode.getY()));
 
-            if (centerNode.getY() - 1 >= 0) neighborList.add(getNode(centerNode.getX() + 1, centerNode.getY() - 1));
 
-            if (centerNode.getY() + 1  < 20) neighborList.add(getNode(centerNode.getX() + 1, centerNode.getY() + 1));
+            if (diagonal) {
+                if (centerNode.getY() - 1 >= 0) neighborList.add(getNode(centerNode.getX() + 1, centerNode.getY() - 1));
 
+                if (centerNode.getY() + 1 < 20) neighborList.add(getNode(centerNode.getX() + 1, centerNode.getY() + 1));
+            }
         }
 
         if (centerNode.getY() - 1 >= 0) neighborList.add(getNode(centerNode.getX(), centerNode.getY() - 1));
@@ -111,7 +118,7 @@ public class AStar {
     }
 
     private PathNode getNode(int x, int y) {
-        if (x  >= 20 || y >= 20) System.out.println(x + " " + y);
+        if (x >= 20 || y >= 20) System.out.println(x + " " + y);
         return grid[y][x];
     }
 
