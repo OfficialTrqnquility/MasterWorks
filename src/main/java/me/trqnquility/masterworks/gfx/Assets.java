@@ -17,6 +17,7 @@ public class Assets {
     public static BufferedImage[] player_down, player_up, player_left, player_right;
     public static BufferedImage[] player_hit;
     public static BufferedImage inventory;
+    public static BufferedImage zombie;
 
     public static BufferedImage startButton;
 
@@ -38,6 +39,7 @@ public class Assets {
 //        player_right[1] = sheet.crop(width * 5, height);
         player_left[0] = playerSheet.crop(width * 5, 0);
 //        player_left[1] = sheet.crop(width * 7, height);
+        zombie = playerSheet.crop(width * 4, height * 2);
 
         grass = tileSheet.crop(width, height * 2);
         water = tileSheet.crop(width * 3, height * 21);

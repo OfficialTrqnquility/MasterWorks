@@ -6,9 +6,12 @@ import me.trqnquility.masterworks.Game;
 import me.trqnquility.masterworks.boundingbox.BoundingBox;
 import me.trqnquility.masterworks.camera.GameCamera;
 import me.trqnquility.masterworks.entity.factory.EntityFactory;
+import me.trqnquility.masterworks.entity.model.Entity;
 import me.trqnquility.masterworks.entity.model.living.LivingEntityType;
+import me.trqnquility.masterworks.entity.model.living.creature.impl.EntityZombie;
 import me.trqnquility.masterworks.entity.model.living.human.impl.EntityPlayer;
 import me.trqnquility.masterworks.location.Position;
+import me.trqnquility.masterworks.pathfinding.AStar;
 import me.trqnquility.masterworks.pathfinding.PathNode;
 import me.trqnquility.masterworks.worlds.World;
 
@@ -25,13 +28,15 @@ public class GameState extends State {
 
     private final EntityPlayer player;
 
-    me.trqnquility.masterworks.pathfinding.AStar aStar;
+    private AStar aStar;
 
 
     public GameState(World world) {
         this.world = world;
         this.camera = new GameCamera(world.getPlayerSpawnX(), world.getPlayerSpawnY());
 
+        EntityZombie zombie = (EntityZombie) EntityFactory.INSTANCE.newLivingEntity(LivingEntityType.ZOMBIE, Position.of(world.getPlayerSpawnX(), world.getPlayerSpawnY() + 10), BoundingBox.of(20, 17, 7, 15), 10, 10, true);
+        world.getEntities().put(zombie.getId(), zombie);
         player = (EntityPlayer) EntityFactory.INSTANCE.newLivingEntity(LivingEntityType.PLAYER, Position.of(world.getPlayerSpawnX(), world.getPlayerSpawnY()), BoundingBox.of(20, 17, 7, 15), 10, 10, true);
         aStar = new me.trqnquility.masterworks.pathfinding.AStar(world);
 
@@ -40,7 +45,6 @@ public class GameState extends State {
 
     @Override
     public void tick() {
-        path = aStar.findPath(0, 0, getPlayer().getPosition().getX() / 32, getPlayer().getPosition().getY() / 32);
         Game.getInstance().getKeyManager().tick();
         world.tick();
     }
@@ -79,5 +83,9 @@ public class GameState extends State {
 
     public World getWorld() {
         return world;
+    }
+
+    public AStar getAStar() {
+        return aStar;
     }
 }

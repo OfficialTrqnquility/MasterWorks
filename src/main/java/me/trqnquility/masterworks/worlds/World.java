@@ -57,6 +57,10 @@ public class World {
 
         }
 
+        for (Entity entity : entities.values()) {
+            entity.render(g);
+        }
+
         ((GameState) State.getState()).getPlayer().render(g);
 
 
@@ -65,9 +69,9 @@ public class World {
     public void tick() {
 
         for (Entity entity : entities.values()) {
-            if (entity.getNeedsTick()) {
+            //if (entity.getNeedsTick()) {
                 entity.tick();
-            }
+            //}
         }
 
         ((GameState) State.getState()).getPlayer().tick();

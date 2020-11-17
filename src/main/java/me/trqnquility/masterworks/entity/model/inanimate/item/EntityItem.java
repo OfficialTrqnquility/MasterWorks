@@ -7,9 +7,9 @@ import me.trqnquility.masterworks.state.GameState;
 import me.trqnquility.masterworks.state.State;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.Map;
+import java.util.List;
 
 public class EntityItem extends InanimateEntity {
 
@@ -27,7 +27,7 @@ public class EntityItem extends InanimateEntity {
 
     @NotNull
     @Override
-    public Map<Integer, BufferedImage> entitySprites() {
+    public List<BufferedImage> entitySprites() {
         return null;
     }
 

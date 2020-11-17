@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Map;
+import java.util.List;
 
 public class EntityPlayer extends EntityHuman {
 
@@ -34,14 +34,14 @@ public class EntityPlayer extends EntityHuman {
 
     @NotNull
     @Override
-    public Map<Integer, BufferedImage> entitySprites() {
+    public List<BufferedImage> entitySprites() {
         return null;
     }
 
     @Override
     public void render(@NotNull Graphics graphics) {
         graphics.drawImage(playerImage, entityPosition().getX(), entityPosition().getY(), playerImage.getWidth(), playerImage.getHeight(), null);
-        graphics.fillRect(entityPosition().getX() + entityBoundingBox().getXOffset(), entityPosition().getY() + entityBoundingBox().getYOffset(), entityBoundingBox().getWidth(), entityBoundingBox().getHeight());
+//        graphics.fillRect(entityPosition().getX() + entityBoundingBox().getXOffset(), entityPosition().getY() + entityBoundingBox().getYOffset(), entityBoundingBox().getWidth(), entityBoundingBox().getHeight());
         inventory.render(graphics);
     }
 

@@ -20,7 +20,7 @@ abstract class Entity constructor(var isSolid: Boolean) : Tickable {
 
     abstract fun entityBoundingBox(): BoundingBox
     abstract fun entityPosition(): Position
-    abstract fun entitySprites(): Map<Int, BufferedImage>
+    abstract fun entitySprites(): List<BufferedImage>
     abstract fun render(graphics: Graphics)
     abstract fun onCollide()
 
