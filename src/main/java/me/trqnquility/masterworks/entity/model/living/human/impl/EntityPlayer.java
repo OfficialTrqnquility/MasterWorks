@@ -127,6 +127,6 @@ public class EntityPlayer extends EntityHuman {
 
     @Override
     public void onCollide() {
-
+        System.out.println("collision");
     }
 }

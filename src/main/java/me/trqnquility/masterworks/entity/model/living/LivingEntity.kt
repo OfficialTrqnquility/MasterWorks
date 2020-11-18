@@ -22,12 +22,12 @@ abstract class LivingEntity constructor(var position: Position, var boundingBox:
 
     override fun tick() {
         for (other in (State.getState() as GameState).world.entities.values) {
-            if (other.isSolid) {
                 if (Utils.isOverlapping(Position.of(position.x + xMove, position.y + yMove), if (other is LivingEntity) Position.of(other.position.x + other.xMove, other.position.y + other.yMove) else other.entityPosition(), boundingBox, other.entityBoundingBox())) {
-                    xMove = 0
-                    yMove = 0
-                }
-                onCollide()
+                    if (other.isSolid) {
+                        xMove = 0
+                        yMove = 0
+                    }
+                    onCollide()
             }
         }
     }
