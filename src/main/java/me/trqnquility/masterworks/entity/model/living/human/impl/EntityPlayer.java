@@ -55,9 +55,9 @@ public class EntityPlayer extends EntityHuman {
         World world = ((GameState) State.getState()).getWorld();
 
         if (keyManager.up) {
-            int leftX = (entityPosition().getX() + entityBoundingBox().getXOffset()) / 32;
-            int y = (entityPosition().getY() + entityBoundingBox().getYOffset() - getSpeed()) / 32;
-            int rightX = (entityPosition().getX() + entityBoundingBox().getXOffset() + entityBoundingBox().getWidth()) / 32;
+            int leftX = (entityPosition().getX() - entityBoundingBox().getWidth() / 2) / 32;
+            int y = (entityPosition().getY() - (entityBoundingBox().getHeight() / 2) - getSpeed()) / 32;
+            int rightX = (entityPosition().getX() + (entityBoundingBox().getWidth() / 2)) / 32;
 
             if (!world.getTile(leftX, y).isSolid()) {
                 if (!world.getTile(rightX, y).isSolid()) {
@@ -71,9 +71,9 @@ public class EntityPlayer extends EntityHuman {
         }
         if (keyManager.down) {
 
-            int leftX = (entityPosition().getX() + entityBoundingBox().getXOffset()) / 32;
-            int y = (entityPosition().getY() + entityBoundingBox().getYOffset() + entityBoundingBox().getHeight() + getSpeed()) / 32;
-            int rightX = (entityPosition().getX() + entityBoundingBox().getXOffset() + entityBoundingBox().getWidth()) / 32;
+            int leftX = (entityPosition().getX() - entityBoundingBox().getWidth() / 2) / 32;
+            int y = (entityPosition().getY() + (entityBoundingBox().getHeight() / 2) + getSpeed()) / 32;
+            int rightX = (entityPosition().getX() + (entityBoundingBox().getWidth() / 2)) / 32;
 
             if (!world.getTile(leftX, y).isSolid()) {
                 if (!world.getTile(rightX, y).isSolid()) {
@@ -86,9 +86,9 @@ public class EntityPlayer extends EntityHuman {
 
         }
         if (keyManager.left) {
-            int topY = (entityPosition().getY() + entityBoundingBox().getYOffset()) / 32;
-            int x = (entityPosition().getX() + entityBoundingBox().getXOffset() - getSpeed()) / 32;
-            int bottomY = (entityPosition().getY() + entityBoundingBox().getYOffset() + entityBoundingBox().getHeight()) / 32;
+            int topY = (entityPosition().getY() - (entityBoundingBox().getHeight() / 2)) / 32;
+            int x = (entityPosition().getX() - (entityBoundingBox().getWidth() / 2) - getSpeed()) / 32;
+            int bottomY = (entityPosition().getY() + (entityBoundingBox().getHeight() / 2)) / 32;
 
             if (!world.getTile(x, bottomY).isSolid()) {
                 if (!world.getTile(x, topY).isSolid()) {
@@ -100,9 +100,9 @@ public class EntityPlayer extends EntityHuman {
             } else world.getTile(x, bottomY).onCollide(this);
         }
         if (keyManager.right) {
-            int topY = (entityPosition().getY() + entityBoundingBox().getYOffset()) / 32;
-            int x = (entityPosition().getX() + entityBoundingBox().getXOffset() + entityBoundingBox().getWidth() + getSpeed()) / 32;
-            int bottomY = (entityPosition().getY() + entityBoundingBox().getYOffset() + entityBoundingBox().getHeight()) / 32;
+            int topY = (entityPosition().getY() - (entityBoundingBox().getHeight() / 2)) / 32;
+            int x = (entityPosition().getX() + (entityBoundingBox().getWidth() / 2) + getSpeed()) / 32;
+            int bottomY = (entityPosition().getY() + (entityBoundingBox().getHeight() / 2)) / 32;
 
             if (!world.getTile(x, bottomY).isSolid() && !world.getTile(x, topY).isSolid()) {
                 xMove += getSpeed();
@@ -127,6 +127,6 @@ public class EntityPlayer extends EntityHuman {
 
     @Override
     public void onCollide() {
-        System.out.println("collision");
+
     }
 }

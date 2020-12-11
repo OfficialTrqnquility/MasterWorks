@@ -35,9 +35,9 @@ public class GameState extends State {
         this.world = world;
         this.camera = new GameCamera(world.getPlayerSpawnX(), world.getPlayerSpawnY());
 
-        EntityZombie zombie = (EntityZombie) EntityFactory.INSTANCE.newLivingEntity(LivingEntityType.ZOMBIE, Position.of(world.getPlayerSpawnX(), world.getPlayerSpawnY() + 10), BoundingBox.of(20, 17, 7, 15), 10, 10, true);
+        EntityZombie zombie = (EntityZombie) EntityFactory.INSTANCE.newLivingEntity(LivingEntityType.ZOMBIE, Position.of(world.getPlayerSpawnX(), world.getPlayerSpawnY() + 10), BoundingBox.of(20, 17), 10, 10, true);
         world.getEntities().put(zombie.getId(), zombie);
-        player = (EntityPlayer) EntityFactory.INSTANCE.newLivingEntity(LivingEntityType.PLAYER, Position.of(world.getPlayerSpawnX(), world.getPlayerSpawnY()), BoundingBox.of(20, 17, 7, 15), 10, 10, true);
+        player = (EntityPlayer) EntityFactory.INSTANCE.newLivingEntity(LivingEntityType.PLAYER, Position.of(world.getPlayerSpawnX(), world.getPlayerSpawnY()), BoundingBox.of(20, 17), 10, 10, true);
         aStar = new me.trqnquility.masterworks.pathfinding.AStar(world);
 
     }

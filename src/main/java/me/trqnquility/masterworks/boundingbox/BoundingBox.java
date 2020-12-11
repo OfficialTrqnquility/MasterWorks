@@ -12,17 +12,13 @@ public class BoundingBox {
     private int width;
     private int height;
 
-    private int xOffset;
-    private int yOffset;
-
-    public BoundingBox(int width, int height, int xOffset, int yOffset) {
+    public BoundingBox(int width, int height) {
         this.width = width;
         this.height = height;
-        this.xOffset = xOffset;
-        this.yOffset = yOffset;
+
     }
 
-    public static BoundingBox of(int width, int height, int xOffset, int yOffset) {
-        return new BoundingBox(width, height, xOffset, yOffset);
+    public static BoundingBox of(int width, int height) {
+        return new BoundingBox(width, height);
     }
 }

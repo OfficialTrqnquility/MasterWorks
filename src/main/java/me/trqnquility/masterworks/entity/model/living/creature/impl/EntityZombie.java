@@ -37,7 +37,7 @@ public final class EntityZombie extends EntityCreature {
 
     @Override
     public void render(@NotNull Graphics graphics) {
-        graphics.drawImage(entitySprites().get(0), entityPosition().getX(), entityPosition().getY(), entitySprites().get(0).getWidth(), entitySprites().get(0).getHeight(), null);
+        graphics.drawImage(entitySprites().get(0), entityPosition().getX() - (entitySprites().get(0).getWidth() / 2), entityPosition().getY() - entitySprites().get(0).getHeight() / 2, entitySprites().get(0).getWidth(), entitySprites().get(0).getHeight(), null);
         if (path != null) {
             Color color = Color.BLACK;
             for (PathNode node : path) {
@@ -59,13 +59,12 @@ public final class EntityZombie extends EntityCreature {
     public void tick() {
 
         GameState state = ((GameState) State.getState());
-        path = state.getAStar().findPath(entityPosition().getX() / 32, entityPosition().getY() / 32, state.getPlayer().getPosition().getX() / 32, state.getPlayer().getPosition().getY() / 32);
+        path = state.getAStar().findPath((entityPosition().getX() + (entityBoundingBox().getWidth() / 2)) / 32, (entityPosition().getY() + (entityBoundingBox().getHeight() / 2)) / 32, state.getPlayer().getPosition().getX() / 32, state.getPlayer().getPosition().getY() / 32);
         if (path != null && path.size() > 1) {
             int deltaX = (path.get(1).getX() - path.get(0).getX()) * 32;
             int deltaY = (path.get(0).getY() - path.get(1).getY()) * 32;
-            entityPosition().add(deltaX / 30, -(deltaY / 30));
+            entityPosition().add(deltaX / 32, -(deltaY / 32));
         }
-        //entityPosition().setX(entityPosition().getX() + distance);
     }
 
     @Override
