@@ -20,6 +20,7 @@ public class TileManager {
         registerTile(new DockTile());
         registerTile(new BeachTile());
         registerTile(new StoneWallTile());
+        registerTile(new StonePortal());
     }
 
     public void registerTile(Tile tile) {

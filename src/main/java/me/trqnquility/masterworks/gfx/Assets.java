@@ -18,8 +18,8 @@ public class Assets {
     public static BufferedImage[] player_hit;
     public static BufferedImage inventory;
     public static BufferedImage zombie;
-    public static BufferedImage brickLeft, brickMiddle, brickRight;
-
+    public static BufferedImage brickLeft, brickMiddle, brickRight, fullBrick;
+    public static BufferedImage brickPortal;
     public static BufferedImage startButton;
 
     public static void init(){
@@ -70,7 +70,9 @@ public class Assets {
         brickLeft = tileSheet.crop(width * 3, height * 4);
         brickMiddle = tileSheet.crop(width * 4, height * 4);
         brickRight = tileSheet.crop(width * 5, height * 4);
+        fullBrick = tileSheet.crop(width * 4, height * 3);
 
+        brickPortal = tileSheet.crop(width * 5, height);
 
 
         startButton = Utils.loadImage("/textures/startbutton.png");
