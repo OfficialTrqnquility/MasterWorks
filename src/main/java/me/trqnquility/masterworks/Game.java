@@ -9,6 +9,8 @@ import me.trqnquility.masterworks.keymanager.KeyManager;
 import me.trqnquility.masterworks.mouse.MouseManager;
 import me.trqnquility.masterworks.state.MenuState;
 import me.trqnquility.masterworks.state.State;
+import me.trqnquility.masterworks.worlds.World;
+import me.trqnquility.masterworks.worlds.WorldManager;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -52,6 +54,8 @@ public class Game implements Runnable {
 		display.getCanvas().addMouseMotionListener(mouseManager);
 
 		State.setState(new MenuState());
+		WorldManager.getInstance();
+		WorldManager.getInstance().loadWorld(new World("worlds/tileworld.txt"));
 
 	}
 

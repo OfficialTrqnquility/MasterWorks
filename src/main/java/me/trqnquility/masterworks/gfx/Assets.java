@@ -18,6 +18,7 @@ public class Assets {
     public static BufferedImage[] player_hit;
     public static BufferedImage inventory;
     public static BufferedImage zombie;
+    public static BufferedImage brickLeft, brickMiddle, brickRight;
 
     public static BufferedImage startButton;
 
@@ -65,6 +66,10 @@ public class Assets {
 
         beach = tileSheet.crop(width * 4, height * 6);
         beachToWaterdown = tileSheet.crop(width * 7, height * 25);
+
+        brickLeft = tileSheet.crop(width * 3, height * 4);
+        brickMiddle = tileSheet.crop(width * 4, height * 4);
+        brickRight = tileSheet.crop(width * 5, height * 4);
 
 
 

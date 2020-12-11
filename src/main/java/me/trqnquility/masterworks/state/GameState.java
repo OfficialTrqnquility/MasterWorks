@@ -6,17 +6,15 @@ import me.trqnquility.masterworks.Game;
 import me.trqnquility.masterworks.boundingbox.BoundingBox;
 import me.trqnquility.masterworks.camera.GameCamera;
 import me.trqnquility.masterworks.entity.factory.EntityFactory;
-import me.trqnquility.masterworks.entity.model.Entity;
 import me.trqnquility.masterworks.entity.model.living.LivingEntityType;
-import me.trqnquility.masterworks.entity.model.living.creature.impl.EntityZombie;
 import me.trqnquility.masterworks.entity.model.living.human.impl.EntityPlayer;
 import me.trqnquility.masterworks.location.Position;
 import me.trqnquility.masterworks.pathfinding.AStar;
 import me.trqnquility.masterworks.pathfinding.PathNode;
 import me.trqnquility.masterworks.worlds.World;
+import me.trqnquility.masterworks.worlds.WorldManager;
 
 import java.awt.*;
-import java.util.Arrays;
 import java.util.List;
 
 @Getter
@@ -31,13 +29,10 @@ public class GameState extends State {
     private AStar aStar;
 
 
-    public GameState(World world) {
-        this.world = world;
+    public GameState() {
+        this.world = WorldManager.getInstance().getWorld("overworld");
         this.camera = new GameCamera(world.getPlayerSpawnX(), world.getPlayerSpawnY());
-
-        EntityZombie zombie = (EntityZombie) EntityFactory.INSTANCE.newLivingEntity(LivingEntityType.ZOMBIE, Position.of(world.getPlayerSpawnX(), world.getPlayerSpawnY() + 10), BoundingBox.of(20, 17), 10, 10, true);
-        world.getEntities().put(zombie.getId(), zombie);
-        player = (EntityPlayer) EntityFactory.INSTANCE.newLivingEntity(LivingEntityType.PLAYER, Position.of(world.getPlayerSpawnX(), world.getPlayerSpawnY()), BoundingBox.of(20, 17), 10, 10, true);
+        player = (EntityPlayer) EntityFactory.INSTANCE.newLivingEntity(LivingEntityType.PLAYER, Position.of(world.getSpawnX() * 32, world.getSpawnY() * 32), BoundingBox.of(20, 17), 10, 10, true);
         aStar = new me.trqnquility.masterworks.pathfinding.AStar(world);
 
     }
@@ -88,4 +83,5 @@ public class GameState extends State {
     public AStar getAStar() {
         return aStar;
     }
+
 }

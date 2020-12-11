@@ -7,8 +7,9 @@ import java.util.Arrays;
 public class WorldLoader {
 
     private String tokens[];
-    private int width, height, playerSpawnx, playerSpawnY;
+    private int width, height, playerSpawnx, playerSpawnY, spawnX, spawnY;
     private String[][] tiles;
+    private String id;
 
     public WorldLoader(String worldFile) {
 
@@ -17,11 +18,13 @@ public class WorldLoader {
         height = Utils.parseInt(tokens[1]);
         playerSpawnx = Utils.parseInt(tokens[2]);
         playerSpawnY = Utils.parseInt(tokens[3]);
-
+        spawnX = Utils.parseInt(tokens[4]);
+        spawnY = Utils.parseInt(tokens[5]);
+        id = tokens[6];
         tiles = new String[width][height];
         for(int y = 0;y < height;y++) {
             for(int x = 0;x < width;x++) {
-                tiles[x][y] = tokens[(x + y * width + 4)];
+                tiles[x][y] = tokens[(x + y * width + 7)];
             }
         }
 
@@ -46,5 +49,17 @@ public class WorldLoader {
 
     public int getPlayerSpawnY() {
         return playerSpawnY;
+    }
+
+    public int getSpawnX() {
+        return spawnX;
+    }
+
+    public int getSpawnY() {
+        return spawnY;
+    }
+
+    public String getId() {
+        return id;
     }
 }

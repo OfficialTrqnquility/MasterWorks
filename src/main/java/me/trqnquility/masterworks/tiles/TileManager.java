@@ -19,6 +19,7 @@ public class TileManager {
         registerTile(new WaterTile());
         registerTile(new DockTile());
         registerTile(new BeachTile());
+        registerTile(new StoneWallTile());
     }
 
     public void registerTile(Tile tile) {

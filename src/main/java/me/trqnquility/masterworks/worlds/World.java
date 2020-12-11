@@ -16,12 +16,13 @@ import java.awt.*;
 import java.util.Map;
 import java.util.UUID;
 
-@Getter
 public class World {
 
-    private int width, height, playerSpawnX, playerSpawnY;
+    private int width, height, playerSpawnX, playerSpawnY, spawnX, spawnY;
 
     private String[][] tiles;
+
+    private  String id;
 
     private Map<UUID, Entity> entities;
 
@@ -32,6 +33,9 @@ public class World {
         height = worldLoader.getHeight();
         playerSpawnX = worldLoader.getPlayerSpawnX();
         playerSpawnY = worldLoader.getPlayerSpawnY();
+        spawnX = worldLoader.getSpawnX();
+        spawnY = worldLoader.getSpawnY();
+        id = worldLoader.getId();
         tiles = worldLoader.getTiles();
         entities = Maps.newConcurrentMap();
 
@@ -86,4 +90,31 @@ public class World {
         return entities;
     }
 
+    public int getPlayerSpawnX() {
+        return playerSpawnX;
+    }
+
+    public int getPlayerSpawnY() {
+        return playerSpawnY;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getSpawnX() {
+        return spawnX;
+    }
+
+    public int getSpawnY() {
+        return spawnY;
+    }
+
+    public String getId() {
+        return id;
+    }
 }
