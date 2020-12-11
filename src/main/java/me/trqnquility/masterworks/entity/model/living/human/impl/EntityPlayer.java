@@ -40,8 +40,12 @@ public class EntityPlayer extends EntityHuman {
 
     @Override
     public void render(@NotNull Graphics graphics) {
-        graphics.drawImage(playerImage, entityPosition().getX(), entityPosition().getY(), playerImage.getWidth(), playerImage.getHeight(), null);
-//        graphics.fillRect(entityPosition().getX() + entityBoundingBox().getXOffset(), entityPosition().getY() + entityBoundingBox().getYOffset(), entityBoundingBox().getWidth(), entityBoundingBox().getHeight());
+        graphics.drawImage(playerImage, entityPosition().getX() - playerImage.getWidth() / 2, entityPosition().getY() - playerImage.getHeight() / 2 - 5, playerImage.getWidth(), playerImage.getHeight(), null);
+        if (Game.getInstance().inDevMode()) {
+            graphics.drawRect(entityPosition().getX() - entityBoundingBox().getWidth() / 2, entityPosition().getY() - entityBoundingBox().getHeight() / 2, entityBoundingBox().getWidth(), entityBoundingBox().getHeight());
+            graphics.setColor(Color.YELLOW);
+        }
+        graphics.drawRect(entityPosition().getX(), entityPosition().getY(), 1, 1);
         inventory.render(graphics);
     }
 

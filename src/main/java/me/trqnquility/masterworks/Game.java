@@ -70,7 +70,7 @@ public class Game implements Runnable {
 	}
 
 	@SneakyThrows
-	private void render(int ticks) throws NoStateException, NoTileException {
+	private void render(int ticks) {
 		bufferStrategy = display.getCanvas().getBufferStrategy();
 
 		State state = State.getState();
@@ -120,7 +120,7 @@ public class Game implements Runnable {
 				try {
 					tick(); // Updates everything
 					render(tick); // Renders everything
-				} catch (NoStateException | NoTileException e) {
+				} catch (NoStateException e) {
 					e.printStackTrace();
 				}
 				ticks++;
@@ -168,5 +168,5 @@ public class Game implements Runnable {
 
 	public static Game getInstance() { return instance; }
 
-
+	public boolean inDevMode() { return devMode; }
 }
