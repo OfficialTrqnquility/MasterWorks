@@ -1,12 +1,15 @@
 package me.trqnquility.masterworks.entity.model.living.human.impl;
 
 import me.trqnquility.masterworks.Game;
+import me.trqnquility.masterworks.animation.Animation;
+import me.trqnquility.masterworks.animation.AnimatnionImpl;
 import me.trqnquility.masterworks.boundingbox.BoundingBox;
 import me.trqnquility.masterworks.entity.model.living.human.EntityHuman;
 import me.trqnquility.masterworks.gfx.Assets;
 import me.trqnquility.masterworks.inventory.Inventory;
 import me.trqnquility.masterworks.keymanager.KeyManager;
 import me.trqnquility.masterworks.location.Position;
+import me.trqnquility.masterworks.mouse.ClickType;
 import me.trqnquility.masterworks.state.GameState;
 import me.trqnquility.masterworks.state.State;
 import me.trqnquility.masterworks.worlds.World;
@@ -25,6 +28,12 @@ public class EntityPlayer extends EntityHuman {
     private int yMove;
 
     private Inventory inventory;
+
+    private final int ATTACK_SPEED = 60;
+    private int hitCooldown = 0;
+    private boolean attacking = false;
+
+    private Animation hitAnimation;
 
     public EntityPlayer(@NotNull Position position, @NotNull BoundingBox boundingBox, @NotNull int health, @NotNull int damage) {
         super(position, boundingBox, 3, health, damage, true);
@@ -46,12 +55,27 @@ public class EntityPlayer extends EntityHuman {
             graphics.setColor(Color.YELLOW);
         }
         graphics.drawRect(entityPosition().getX(), entityPosition().getY(), 1, 1);
+        if (hitAnimation != null && hitAnimation.isActive()) {
+
+            graphics.drawArc(entityPosition().getX(), entityPosition().getY(), 100, 300, 0, 100);
+        }
         inventory.render(graphics);
     }
 
     @Override
     public void tick() {
         move();
+
+        if (hitAnimation != null && hitAnimation.isActive()) {
+            hitAnimation.setAnimationLength(hitAnimation.getAnimationLength() - 1);
+            if (hitAnimation.getAnimationLength() <= 0) {
+                hitAnimation.stop();
+            }
+        }
+
+        if (hitCooldown > 0) {
+            hitCooldown--;
+        }
     }
 
     private final void move() {
@@ -132,5 +156,15 @@ public class EntityPlayer extends EntityHuman {
     @Override
     public void onCollide() {
 
+    }
+
+    public void onClick(ClickType clickType) {
+        if (!attacking && hitCooldown <= 0) {
+            if (hitAnimation == null || (hitAnimation != null && !hitAnimation.isActive())) {
+                hitCooldown = ATTACK_SPEED;
+                hitAnimation = new AnimatnionImpl();
+                hitAnimation.start();
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package me.trqnquility.masterworks.mouse;
 
+import me.trqnquility.masterworks.state.GameState;
 import me.trqnquility.masterworks.state.MenuState;
 import me.trqnquility.masterworks.state.State;
 import me.trqnquility.masterworks.ui.UIObject;
@@ -19,7 +20,10 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        State state = State.getState();
+        if (state instanceof GameState) {
+            ((GameState) state).getPlayer().onClick(new ClickType(e.getButton() == MouseEvent.BUTTON1, e.getButton() == MouseEvent.BUTTON2, e.getX(), e.getY()));
+        }
     }
 
     @Override
