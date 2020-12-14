@@ -21,11 +21,14 @@ public class Assets {
     public static BufferedImage brickLeft, brickMiddle, brickRight, fullBrick;
     public static BufferedImage brickPortal;
     public static BufferedImage startButton;
+    public static BufferedImage stoneFloor, stoneFloorWithStones;
+    public static BufferedImage stoneWallTopLeft, stoneWallTop, stoneWallTopRight, stoneWallLeft, stoneWallRight, stoneWallBottomLeft, stoneWallBottom, stoneWallBottomRight;
 
     public static void init(){
         SpriteSheet playerSheet = new SpriteSheet(Utils.loadImage("/textures/textures.png"), width, height);
         SpriteSheet tileSheet = new SpriteSheet(Utils.loadImage("/textures/tilemap.png"), 32, 32);
         SpriteSheet uiSheet = new SpriteSheet(Utils.loadImage("/textures/ui_big_pieces.png"), 117, 40);
+        SpriteSheet dungeonSheet = new SpriteSheet(Utils.loadImage("/textures/dungeon.png"), 16, 16);
 
         player_down = new BufferedImage[2];
         player_up = new BufferedImage[2];
@@ -73,6 +76,9 @@ public class Assets {
         fullBrick = tileSheet.crop(width * 4, height * 3);
 
         brickPortal = tileSheet.crop(width * 5, height);
+
+        stoneFloor = dungeonSheet.crop( width / 2, height / 2);
+        stoneFloorWithStones = dungeonSheet.crop(48, 16);
 
 
         startButton = Utils.loadImage("/textures/startbutton.png");

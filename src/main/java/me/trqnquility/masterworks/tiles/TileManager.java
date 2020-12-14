@@ -21,6 +21,7 @@ public class TileManager {
         registerTile(new BeachTile());
         registerTile(new StoneWallTile());
         registerTile(new StonePortal());
+        registerTile(new StoneFloorTile());
     }
 
     public void registerTile(Tile tile) {

@@ -3,7 +3,6 @@ package me.trqnquility.masterworks;
 import lombok.SneakyThrows;
 import me.trqnquility.masterworks.display.Display;
 import me.trqnquility.masterworks.exceptions.NoStateException;
-import me.trqnquility.masterworks.exceptions.NoTileException;
 import me.trqnquility.masterworks.gfx.Assets;
 import me.trqnquility.masterworks.keymanager.KeyManager;
 import me.trqnquility.masterworks.mouse.MouseManager;
@@ -54,8 +53,9 @@ public class Game implements Runnable {
 		display.getCanvas().addMouseMotionListener(mouseManager);
 
 		State.setState(new MenuState());
-		WorldManager.getInstance();
-		WorldManager.getInstance().loadWorld(new World("worlds/tileworld.txt"));
+		WorldManager.getInstance().loadWorld(new World("worlds/overworld.txt"));
+		WorldManager.getInstance().loadWorld(new World("worlds/house.txt"));
+		WorldManager.getInstance().loadWorld(new World("worlds/bossworld.txt"));
 
 	}
 

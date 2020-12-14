@@ -2,6 +2,7 @@ package me.trqnquility.masterworks.worlds;
 
 import com.google.common.collect.Maps;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class WorldManager {
@@ -20,6 +21,7 @@ public class WorldManager {
     }
 
     public World getWorld(String id) {
+        System.out.println(Arrays.toString(worlds.keySet().toArray()));
         return worlds.getOrDefault(id, worlds.get("overworld"));
     }
 

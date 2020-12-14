@@ -2,6 +2,9 @@ package me.trqnquility.masterworks.tiles;
 
 import me.trqnquility.masterworks.entity.model.living.LivingEntity;
 import me.trqnquility.masterworks.gfx.Assets;
+import me.trqnquility.masterworks.state.GameState;
+import me.trqnquility.masterworks.state.State;
+import me.trqnquility.masterworks.worlds.WorldManager;
 
 import java.awt.image.BufferedImage;
 
@@ -23,6 +26,8 @@ public class StonePortal extends Tile {
 
     @Override
     public void onCollide(LivingEntity entity) {
-        System.out.println("True");
+        GameState state = (GameState) State.getState();
+        state.setWorld(WorldManager.getInstance().getWorld("bossworld"));
+        System.out.println(state.getWorld().getTile(0, 0).getId());
     }
 }

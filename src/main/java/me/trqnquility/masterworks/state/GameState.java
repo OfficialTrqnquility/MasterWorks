@@ -34,6 +34,7 @@ public class GameState extends State {
         this.camera = new GameCamera(world.getPlayerSpawnX(), world.getPlayerSpawnY());
         player = (EntityPlayer) EntityFactory.INSTANCE.newLivingEntity(LivingEntityType.PLAYER, Position.of(world.getSpawnX() * 32, world.getSpawnY() * 32), BoundingBox.of(20, 17), 10, 10, true);
         aStar = new me.trqnquility.masterworks.pathfinding.AStar(world);
+        System.out.println(world.getId());
 
     }
     List<PathNode> path;
@@ -71,9 +72,12 @@ public class GameState extends State {
     }
 
     public void setWorld(World world) {
+        if (this.world == world) return;
         this.world = world;
         camera.set(world.getPlayerSpawnX(), world.getPlayerSpawnY());
-        player.setPosition(Position.of(world.getPlayerSpawnX(), world.getPlayerSpawnY()));
+        player.setPosition(Position.of(world.getSpawnX() * 32, world.getSpawnY() * 32));
+        System.out.println(world.getId());
+
     }
 
     public World getWorld() {
